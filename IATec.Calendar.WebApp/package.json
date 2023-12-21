@@ -1,5 +1,5 @@
 {
-  "name": "iatec.calendar.webapp",
+  "name": "IATec.Calendar.webapp",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:iatec.calendar.webapp": "node dist/iatec.calendar.webapp/server/server.mjs"
+    "serve:ssr:IATec.Calendar.webapp": "node dist/IATec.Calendar.webapp/server/server.mjs"
   },
   "private": true,
   "dependencies": {

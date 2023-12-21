@@ -1,4 +1,4 @@
-namespace iatec.calendar.enums
+namespace IATec.Calendar.Enums
 {
     public enum EStatus
     {

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using iatec.calendar.enums;
-using iatec.calendar.models;
+using IATec.Calendar.Domain.UserEvents.Entities;
+using IATec.Calendar.Enums;
 
 
-namespace iatec.calendar.service.domain
+namespace IATec.Calendar.Domain.Events.Entities
 {
     [Table("events", Schema = "calendar")]
     public class EventEntityDomain

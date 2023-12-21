@@ -1,12 +1,12 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using iatec.calendar.mediator.commands;
-using iatec.calendar.service.domain;
+using IATec.Calendar.Domain.Users.Commands;
+using IATec.Calendar.Domain.Users.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace iatec.calendar.mediator.handlers
+namespace IATec.Calendar.Domain.Users.Handlers
 {
     public class UserHandler : IRequestHandler<CreateUserCommand>,
                                 IRequestHandler<UpdateUserCommand>,

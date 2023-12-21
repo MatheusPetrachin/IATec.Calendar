@@ -1,5 +1,4 @@
-using System.Reflection;
-using iatec.calendar.mediator.handlers;
+using IATec.Calendar.Domain.Users.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace iatec.calendar
+namespace IATec.Calendar
 {
     public class Startup
     {

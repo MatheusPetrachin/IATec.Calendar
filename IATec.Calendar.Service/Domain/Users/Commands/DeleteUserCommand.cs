@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace iatec.calendar.mediator.commands
+namespace IATec.Calendar.Domain.Users.Commands
 {
     public class DeleteUserCommand : IRequest
     {

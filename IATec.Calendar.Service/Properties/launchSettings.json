@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "iatec.calendar": {
+    "IATec.Calendar": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

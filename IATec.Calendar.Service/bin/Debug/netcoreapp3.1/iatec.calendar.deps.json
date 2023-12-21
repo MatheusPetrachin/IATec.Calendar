@@ -29,7 +29,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "iatec.calendar/1.0.0": {
+      "IATec.Calendar/1.0.0": {
         "dependencies": {
           "MediatR": "8.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "8.0.0",
@@ -307,10 +307,10 @@
           "WindowsBase": "4.0.0.0"
         },
         "runtime": {
-          "iatec.calendar.dll": {}
+          "IATec.Calendar.dll": {}
         },
         "compile": {
-          "iatec.calendar.dll": {}
+          "IATec.Calendar.dll": {}
         }
       },
       "MediatR/8.0.1": {
@@ -2306,7 +2306,7 @@
     }
   },
   "libraries": {
-    "iatec.calendar/1.0.0": {
+    "IATec.Calendar/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,9 +1,10 @@
 using System;
-using iatec.calendar.service.domain;
+using IATec.Calendar.Domain.Users.Commands.Base;
+using IATec.Calendar.Domain.Users.Entities;
 
-namespace iatec.calendar.mediator.commands
+namespace IATec.Calendar.Domain.Users.Commands
 {
-    public class CreateUserCommand : UserBaseCommand
+    public class UpdateUserCommand : UserBaseCommand
     {
         public UserEntityDomain ToEntity()
             => new UserEntityDomain(Guid.NewGuid(),

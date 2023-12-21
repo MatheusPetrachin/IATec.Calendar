@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using iatec.calendar.mediator.commands;
-using iatec.calendar.models;
+using IATec.Calendar.Domain.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace iatec.calendar.Controllers.Users
+namespace IATec.Calendar.Controllers.Users
 {
     [ApiController]
     [Route("[controller]")]

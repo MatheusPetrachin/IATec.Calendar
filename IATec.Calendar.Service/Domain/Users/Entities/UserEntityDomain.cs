@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using iatec.calendar.models;
+using IATec.Calendar.Domain.UserEvents.Entities;
 
-namespace iatec.calendar.service.domain
+namespace IATec.Calendar.Domain.Users.Entities
 {
     [Table("users", Schema = "identity")]
     public class UserEntityDomain
