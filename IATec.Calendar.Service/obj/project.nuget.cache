@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0/l32R6ABDYyqWUYzpdaVeqcZZQVMdyt8looOpYo1zui+PXvGCzrw1LwHAAocGZ/rv+vGVE4D8KgxWK5eM1Faw==",
+  "dgSpecHash": "D1ahUm54RBWrWjYNF3n6+gU1oGAjjwEvWzF9L8clI2ViVm/jFiqEzyXPSN/C8+kHyO6e8Sbl/Wsx83Mso05ebw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec\\IATec.Calendar.Service\\iatec.calendar.csproj",
+  "projectFilePath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATec.Calendar.Service\\iatec.calendar.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\mediatr\\8.0.1\\mediatr.8.0.1.nupkg.sha512",
     "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\8.0.0\\mediatr.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",

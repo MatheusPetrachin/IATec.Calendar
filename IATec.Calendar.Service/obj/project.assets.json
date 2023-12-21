@@ -1206,11 +1206,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec\\IATec.Calendar.Service\\iatec.calendar.csproj",
+      "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATec.Calendar.Service\\iatec.calendar.csproj",
       "projectName": "iatec.calendar",
-      "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec\\IATec.Calendar.Service\\iatec.calendar.csproj",
+      "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATec.Calendar.Service\\iatec.calendar.csproj",
       "packagesPath": "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec\\IATec.Calendar.Service\\obj\\",
+      "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATec.Calendar.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MatheusRoquePetrachi\\NuGet.Config",
