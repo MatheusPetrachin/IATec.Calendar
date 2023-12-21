@@ -1,3 +1,4 @@
+using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Users.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
