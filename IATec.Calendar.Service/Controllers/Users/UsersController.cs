@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using IATec.Calendar.Domain.Users.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ namespace IATec.Calendar.Controllers.Users
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;
@@ -36,8 +38,6 @@ namespace IATec.Calendar.Controllers.Users
                 user.SetId(Guid.NewGuid());
 
                 await _mediator.Send(user);
-                // _context.Users.Add(user);
-                // _context.SaveChanges();
 
                 return Ok(user);
             }
