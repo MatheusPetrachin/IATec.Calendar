@@ -3,11 +3,18 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "IATec.Calendar.webapp": {
+    "IATec.Calendar.WebApi": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
         }
       },
       "root": "",
@@ -17,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/IATec.Calendar.webapp",
+            "outputPath": "dist/iatec.calendar.web-api",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -32,12 +39,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -67,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "IATec.Calendar.webapp:build:production"
+              "buildTarget": "IATec.Calendar.WebApi:build:production"
             },
             "development": {
-              "buildTarget": "IATec.Calendar.webapp:build:development"
+              "buildTarget": "IATec.Calendar.WebApi:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "IATec.Calendar.webapp:build"
+            "buildTarget": "IATec.Calendar.WebApi:build"
           }
         },
         "test": {
@@ -104,6 +106,6 @@
     }
   },
   "cli": {
-    "analytics": "2f69ec64-1ac8-41e7-bbac-7756997f61e9"
+    "analytics": "e3204771-4b0d-4724-a485-21946d6cb40e"
   }
 }
