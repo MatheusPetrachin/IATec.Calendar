@@ -1,7 +1,7 @@
 <div class="container">
 
     <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="date"></mat-calendar>
+        <mat-calendar [(selected)]="date" (click)="loadData(date)"></mat-calendar>
     </mat-card>
 
     <br />
@@ -11,6 +11,12 @@
 
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="eventDate">
+                <th mat-header-cell *matHeaderCellDef> Data </th>
+                <td mat-cell *matCellDef="let element"> {{element.eventDate}} </td>
+            </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">

@@ -16,13 +16,12 @@ export class HomeComponent {
   }
 
   dataSource: EventModel[] = [];
-  displayedColumns: string[] = ['name'];
-
+  displayedColumns: string[] = ['eventDate', 'name'];
 
   date: Date = new Date();
 
   ngOnInit() {
-    this.loadData()
+    this.loadData(this.date)
   }
 
 
@@ -30,7 +29,7 @@ export class HomeComponent {
     this.date = new Date();
   }
 
-  loadData(): void {
+  loadData(date: Date): void {
     this.dataService.getListEventData('ec524a4b-c201-44b4-8dd1-ad03e29a3ee6', this.date)
       .subscribe({
         next: (response) => {
