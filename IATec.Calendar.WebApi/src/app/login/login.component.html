@@ -1,6 +1,8 @@
-<div class="login-container col-sm-8">
+<div class="login-container col-12 col-sm-8 col-md-6 col-lg-4">
     <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
-        <h2>Login</h2>
+        <div class="text-center mb-3"> <!-- Adicionado text-center para centralizar e mb-3 para margem inferior -->
+            <img src="assets\calendar.jpg" alt="Imagem 1">
+        </div>
 
         <mat-form-field class="col-12">
             <mat-label>Usuário:</mat-label>
@@ -13,6 +15,8 @@
             <input matInput type="password" id="password" formControlName="password" required>
             <mat-error *ngIf="form.get('password')?.hasError('required')">Senha obrigatória</mat-error>
         </mat-form-field>
+
+        <div class="mb-3"></div>
 
         <button type="submit" mat-button>Entrar</button>
     </form>
