@@ -19,6 +19,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthGuardService } from './AuthGuardService';
 import { EventsComponent } from './events/events.component';
 import { ApiConfigServiceService } from './ApiConfigServiceService';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -41,7 +49,15 @@ import { ApiConfigServiceService } from './ApiConfigServiceService';
     MatButtonModule,
     HttpClientModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatGridListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDividerModule,
+    MatListModule,
+    FlexLayoutModule
   ],
   providers: [AuthService, AuthGuardService, ApiConfigServiceService, HttpClient],
   bootstrap: [AppComponent]
