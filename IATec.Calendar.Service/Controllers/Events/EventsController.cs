@@ -43,7 +43,6 @@ namespace IATec.Calendar.Controllers.Events
             try
             {
                 var events = await _context.Events.Where(x => x.CreatedBy == userId && x.EventDate.Date == period.Date).ToListAsync();
-
                 return Ok(events);
             }
             catch (Exception ex)
