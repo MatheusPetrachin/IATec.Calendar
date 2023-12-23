@@ -21,8 +21,8 @@ namespace IATec.Calendar.Domain.Events.Entities
                                  Guid participantId,
                                  Guid createdBy,
                                  DateTime creatdAt,
-                                 Guid updatedBy,
-                                 DateTime updatedAt)
+                                 Guid? updatedBy,
+                                 DateTime? updatedAt)
         {
             Id = id;
             Name = name;
@@ -46,12 +46,13 @@ namespace IATec.Calendar.Domain.Events.Entities
         public string Number { get; private set; }
         public string Neighborhood { get; private set; }
         public string City { get; private set; }
+        public DateTime EventDate { get; private set; }
         public EStatus Status { get; private set; }
         public Guid ParticipantId { get; private set; }
         public Guid CreatedBy { get; private set; }
         public DateTime CreatdAt { get; private set; }
-        public Guid UpdatedBy { get; private set; }
-        public DateTime UpdatedAt { get; private set; }
+        public Guid? UpdatedBy { get; private set; }
+        public DateTime? UpdatedAt { get; private set; }
 
         public List<UserEventEntityDomain> Participants { get; set; }
     }

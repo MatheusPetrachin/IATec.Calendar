@@ -29,8 +29,8 @@ namespace iatec.calendar.Migrations
                     ParticipantId = table.Column<Guid>(nullable: false),
                     CreatedBy = table.Column<Guid>(nullable: false),
                     CreatdAt = table.Column<DateTime>(nullable: false),
-                    UpdatedBy = table.Column<Guid>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: false)
+                    UpdatedBy = table.Column<Guid>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
