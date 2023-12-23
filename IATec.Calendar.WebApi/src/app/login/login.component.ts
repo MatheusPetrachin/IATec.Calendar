@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './auth-service.service';
+import { AuthService } from './AuthService';
 import { UserModel } from './user-model';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  showToolbar: boolean = false;
+
   form: FormGroup;
 
   constructor(private authService: AuthService, private _formBuilder: FormBuilder, private router: Router) {

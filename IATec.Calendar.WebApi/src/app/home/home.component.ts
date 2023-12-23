@@ -10,8 +10,5 @@ export class HomeComponent {
 
   constructor(private router: Router) { }
 
-  logout() {
-    localStorage.removeItem('Authorization');
-    this.router.navigate(['/login']);
-  }
+
 }

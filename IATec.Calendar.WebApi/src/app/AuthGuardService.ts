@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './login/auth-service.service';
+import { AuthService } from './login/AuthService';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,7 @@ export class AuthGuardService implements CanActivate {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      localStorage.removeItem('Authorization');
-      return this.router.createUrlTree(['/login']);
+      return this.authService.logout();
     }
   }
 }
