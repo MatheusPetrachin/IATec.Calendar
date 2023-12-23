@@ -9,21 +9,23 @@ import { UserModel } from './user-model';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  form: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private _formBuilder: FormBuilder) {
+    this.form = this._formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    })
+  }
 
-  form: FormGroup = new FormGroup({
-    email: new FormControl('email'),
-    password: new FormControl('password'),
-  });
-
-  user = this.form.value as UserModel;
 
   submit() {
-    console.log("email: " + this.user.email);
-    console.log("senha: " + this.user.password);
+    var user = this.form.value as UserModel;
 
-    this.authService.login(this.user)
+    console.log("email: " + user.email);
+    console.log("senha: " + user.password);
+
+    this.authService.login(user)
       .subscribe({
         next: (response) => {
           localStorage.setItem('Authorization', 'Bearer ' + response)
