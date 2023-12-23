@@ -17,10 +17,9 @@ export class AuthService {
 
   login(credentials: UserModel): Observable<any> {
     const headers = new HttpHeaders({
-      userName: credentials.email,
       'Content-Type': 'application/json',
     });
 
-    return this.http.post(`${this.apiUrl}/Login`, null, { headers, responseType: 'text' })
+    return this.http.post(`${this.apiUrl}/Login`, credentials, { headers, responseType: 'text' })
   }
 }

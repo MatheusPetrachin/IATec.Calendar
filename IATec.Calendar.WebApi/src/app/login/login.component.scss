@@ -1,28 +1,58 @@
-:host {
-    display: flex;
-    justify-content: center;
-    margin: 100px 0px;
+/* login.component.css */
+
+body {
+    margin: 0;
+    overflow: hidden;
+    /* Adicione esta linha para ocultar a barra de rolagem do corpo */
 }
 
-.mat-form-field {
+.login-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 350px;
+    margin: auto;
+    margin-top: 50px;
+    box-sizing: border-box;
+    /* Adicione esta linha para incluir padding e borda na largura total */
+}
+
+.login-form {
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+input {
     width: 100%;
-    min-width: 300px;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-mat-card-title,
-mat-card-content {
-    display: flex;
-    justify-content: center;
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.error {
-    padding: 16px;
-    width: 300px;
-    color: white;
-    background-color: red;
-}
-
-.button {
-    display: flex;
-    justify-content: flex-end;
+button:hover {
+    background-color: #45a049;
 }

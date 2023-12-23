@@ -1,7 +1,17 @@
-.example-icon {
-    padding: 0 14px;
+.toolbar {
+    background-color: #ccdfcd;
 }
 
-.example-spacer {
-    flex: 1 1 auto;
+.logoutButton {
+    text-decoration-color: #ccdfcd;
+}
+
+/* Adicione essas regras ao seu arquivo de estilo */
+
+.toolbar-row {
+    justify-content: flex-end;
+}
+
+.spacer {
+    flex: 1;
 }
