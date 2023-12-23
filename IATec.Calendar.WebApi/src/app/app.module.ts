@@ -20,13 +20,15 @@ import { AuthGuardService } from './AuthGuardService';
 import { EventsComponent } from './events/events.component';
 import { ApiConfigServiceService } from './ApiConfigServiceService';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -57,9 +59,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatPaginatorModule,
     MatDividerModule,
     MatListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
+    MatOptionModule
   ],
-  providers: [AuthService, AuthGuardService, ApiConfigServiceService, HttpClient],
+  providers: [AuthService, AuthGuardService, ApiConfigServiceService, HttpClient, { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,6 +24,10 @@ export class HomeComponent {
     this.loadData(this.date)
   }
 
+  redirect(page: string) {
+    this.router.navigate(['/' + page]);
+  }
+
 
   obterDataAtual() {
     this.date = new Date();
