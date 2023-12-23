@@ -11,6 +11,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  isLoggedIn(): boolean {
+    return localStorage.getItem('Authorization') !== null;
+  }
+
   login(credentials: UserModel): Observable<any> {
     const headers = new HttpHeaders({
       userName: credentials.email,

@@ -14,6 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from './login/auth-service.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -33,9 +36,11 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatIconModule
   ],
-  providers: [AuthService, HttpClient],
+  providers: [AuthService, AuthGuardService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
