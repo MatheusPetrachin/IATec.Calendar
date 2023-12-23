@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthGuardService } from './AuthGuardService';
 import { EventsComponent } from './events/events.component';
+import { ApiConfigServiceService } from './ApiConfigServiceService';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { EventsComponent } from './events/events.component';
     MatToolbarModule,
     MatIconModule
   ],
-  providers: [AuthService, AuthGuardService, HttpClient],
+  providers: [AuthService, AuthGuardService, ApiConfigServiceService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

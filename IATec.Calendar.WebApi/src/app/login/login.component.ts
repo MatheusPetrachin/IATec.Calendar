@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './AuthService';
-import { UserModel } from './user-model';
+import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  showToolbar: boolean = false;
-
   form: FormGroup;
 
-  constructor(private authService: AuthService, private _formBuilder: FormBuilder, private router: Router) {
+  constructor(private authService: AuthService,
+    private _formBuilder: FormBuilder,
+    private router: Router) {
     this.form = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -25,10 +25,11 @@ export class LoginComponent {
     var user = this.form.value as UserModel;
 
     if (this.form.valid) {
-      this.authService.login(user)
+      this.authService.getToken(user)
         .subscribe({
-          next: (response) => {
-            localStorage.setItem('Authorization', 'Bearer ' + response)
+          next: (user) => {
+            localStorage.setItem('UserName', user.name)
+            localStorage.setItem('Authorization', 'Bearer ' + user.token)
             this.router.navigate(['/home']);
           },
           error: (erro) => {

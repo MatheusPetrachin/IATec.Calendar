@@ -1,33 +1,33 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, map, tap } from 'rxjs';
-import { UserModel } from './user-model';
+import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
+import { ApiConfigServiceService } from '../ApiConfigServiceService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:5001';
+  constructor(private http: HttpClient,
+    private configService: ApiConfigServiceService,
+    private router: Router) { }
 
-  constructor(private http: HttpClient, private router: Router) { }
-
-  showToolbarEmitter = new EventEmitter<boolean>()
+  showToolbarEmitter = new EventEmitter<boolean>();
 
   isLoggedIn(): boolean {
     this.showToolbarEmitter.emit(true);
     return localStorage.getItem('Authorization') !== null;
   }
 
-  login(credentials: UserModel): Observable<any> {
+  getToken(credentials: UserModel): Observable<UserModel> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
-
     this.showToolbarEmitter.emit(true);
 
-    return this.http.post(`${this.apiUrl}/Login`, credentials, { headers, responseType: 'text' })
+    return this.http.post<UserModel>(`${this.configService.apiUrl}/Login`, credentials, { headers })
   }
 
   logout() {

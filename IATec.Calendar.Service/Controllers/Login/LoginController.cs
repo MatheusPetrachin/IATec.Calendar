@@ -8,25 +8,27 @@ using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Login.Commands;
 using IATec.Calendar.Domain.Login.Constants;
+using IATec.Calendar.Domain.Login.Response;
 using IATec.Calendar.Domain.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace IATec.Calendar.Controllers.Users
+namespace IATec.Calendar.Controllers.Login
 {
     [ApiController]
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
-        private readonly ILogger<UsersController> _logger;
+        private readonly ILogger<LoginController> _logger;
         private readonly Context _context;
         private readonly IMediator _mediator;
 
         public LoginController(IMediator mediator,
-                               ILogger<UsersController> logger,
+                               ILogger<LoginController> logger,
                                Context context)
         {
             _mediator = mediator;
@@ -45,7 +47,9 @@ namespace IATec.Calendar.Controllers.Users
         {
             try
             {
-                if (_context.Users.Any(x => x.Email.Equals(command.Email) && x.Password.Equals(command.Password)))
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.Equals(command.Email) && x.Password.Equals(command.Password));
+
+                if (user != null)
                 {
                     var tokenHandler = new JwtSecurityTokenHandler();
                     var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Settings.Secret));
@@ -61,7 +65,13 @@ namespace IATec.Calendar.Controllers.Users
                     var token = tokenHandler.CreateToken(tokenDescriptor);
                     var tokenString = tokenHandler.WriteToken(token);
 
-                    return Ok(tokenString);
+                    return Ok(new LoginResponse()
+                    {
+                        Id = user.Id.ToString(),
+                        Email = user.Email,
+                        Name = user.Name,
+                        Token = tokenString
+                    });
                 }
                 else
                 {

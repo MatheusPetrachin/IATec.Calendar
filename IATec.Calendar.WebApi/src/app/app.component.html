@@ -1,6 +1,15 @@
 <mat-toolbar class="toolbar" *ngIf="showToolbar">
     <mat-toolbar-row class="toolbar-row">
+
+
+        <button mat-button (click)="redirect('home')">
+            Home
+        </button>
+
         <span class="spacer"></span>
+
+        <i class="material-icons">people</i>
+        <span>{{ userName }}</span>
         <button mat-button (click)="logout()">
             <i class="material-icons">logout</i>
         </button>
