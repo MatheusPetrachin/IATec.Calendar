@@ -16,7 +16,9 @@ export const routes: Routes = [
   },
   {
     path: "home", component: HomeComponent, canActivate: [AuthGuardService],
-    children: [{ path: "events", component: EventsComponent }]
+  },
+  {
+    path: "events", component: EventsComponent, canActivate: [AuthGuardService],
   }
 ];
 
