@@ -1,11 +1,18 @@
-<div class="login-container">
+<div class="login-container col-sm-8">
     <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
         <h2>Login</h2>
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" formControlName="email" required>
 
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" formControlName="password" required>
+        <mat-form-field class="col-12">
+            <mat-label>Usuário:</mat-label>
+            <input matInput type="text" id="username" formControlName="email" required>
+            <mat-error *ngIf="form.get('email')?.hasError('required')">Nome obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+            <mat-label>Senha:</mat-label>
+            <input matInput type="password" id="password" formControlName="password" required>
+            <mat-error *ngIf="form.get('password')?.hasError('required')">Senha obrigatória</mat-error>
+        </mat-form-field>
 
         <button type="submit" mat-button>Entrar</button>
     </form>
