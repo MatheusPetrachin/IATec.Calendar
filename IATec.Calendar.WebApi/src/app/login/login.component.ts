@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth-service.service';
 import { UserModel } from './user-model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { UserModel } from './user-model';
 export class LoginComponent {
   form: FormGroup;
 
-  constructor(private authService: AuthService, private _formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private _formBuilder: FormBuilder, private router: Router) {
     this.form = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -29,6 +30,7 @@ export class LoginComponent {
       .subscribe({
         next: (response) => {
           localStorage.setItem('Authorization', 'Bearer ' + response)
+          this.router.navigate(['/home']);
         },
         error: (erro) => {
           console.log(erro.message);
