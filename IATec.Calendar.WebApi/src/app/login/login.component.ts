@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './AuthService';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
@@ -27,9 +27,9 @@ export class LoginComponent {
     if (this.form.valid) {
       this.authService.getToken(user)
         .subscribe({
-          next: (user) => {
-            localStorage.setItem('UserName', user.name)
-            localStorage.setItem('Authorization', 'Bearer ' + user.token)
+          next: (response) => {
+            localStorage.setItem('UserName', response.name)
+            localStorage.setItem('Authorization', 'Bearer ' + response.token)
             this.router.navigate(['/home']);
           },
           error: (erro) => {

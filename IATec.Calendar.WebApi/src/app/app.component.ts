@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './login/AuthService';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserModel } from './models/usermodel';
-import { ApiConfigServiceService } from './ApiConfigServiceService';
 
 @Component({
   selector: 'app-root',

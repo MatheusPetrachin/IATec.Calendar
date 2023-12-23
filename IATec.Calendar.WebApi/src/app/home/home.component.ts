@@ -1,7 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
 import { EventModel } from '../models/eventmodel';
 import { DataService } from '../DataService';
 
@@ -28,13 +26,12 @@ export class HomeComponent {
     this.router.navigate(['/' + page]);
   }
 
-
   obterDataAtual() {
     this.date = new Date();
   }
 
   loadData(date: Date): void {
-    this.dataService.getListEventData('ec524a4b-c201-44b4-8dd1-ad03e29a3ee6', this.date)
+    this.dataService.getListEventData('ec524a4b-c201-44b4-8dd1-ad03e29a3ee6', date)
       .subscribe({
         next: (response) => {
           this.dataSource = response;

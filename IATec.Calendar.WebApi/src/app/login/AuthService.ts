@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
 import { ApiConfigServiceService } from '../ApiConfigServiceService';
