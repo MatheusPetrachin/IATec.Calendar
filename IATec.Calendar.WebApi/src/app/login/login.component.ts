@@ -1,41 +1,48 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth-service.service';
+import { UserModel } from './user-model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  meuFormulario: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.meuFormulario = this.fb.group({
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required],
-      // adicione mais campos conforme necessário
-    });
+  constructor(private authService: AuthService) { }
+
+  form: FormGroup = new FormGroup({
+    email: new FormControl('email'),
+    password: new FormControl('password'),
+  });
+
+  user = this.form.value as UserModel;
+
+  submit() {
+    console.log("email: " + this.user.email);
+    console.log("senha: " + this.user.password);
+
+    this.authService.login(this.user)
+      .subscribe({
+        next: (response) => {
+          localStorage.setItem('Authorization', 'Bearer ' + response)
+        },
+        error: (erro) => {
+          console.log(erro.message);  // Acesse diretamente a propriedade "message" para obter informações do erro
+
+          if (erro.status === 401) {
+            alert("Usuário ou Senha inválido(s)!");
+          } else {
+            alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+          }
+
+          console.log(erro);
+        }
+      });
+
   }
+  @Input() error!: string | null;
 
-  submitForm() {
-    // Lógica para manipular o envio do formulário
-    console.log(this.meuFormulario.value);
-
-    //   const credentials = {
-    //     username: this.meuFormulario
-    //   };
-
-    //   this.authService.login(credentials).subscribe(
-    //     (response) => {
-    //       // Manipular o token retornado pela API
-    //       const token = response.token;
-    //       console.log('Token:', token);
-    //     },
-    //     (error) => {
-    //       // Lidar com erros de autenticação
-    //       console.error('Erro de autenticação:', error);
-    //     }
-    //   );
-  }
+  @Output() submitEM = new EventEmitter();
 }
