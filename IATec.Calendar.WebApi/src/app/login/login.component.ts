@@ -29,7 +29,7 @@ export class LoginComponent {
           localStorage.setItem('Authorization', 'Bearer ' + response)
         },
         error: (erro) => {
-          console.log(erro.message);  // Acesse diretamente a propriedade "message" para obter informações do erro
+          console.log(erro.message);
 
           if (erro.status === 401) {
             alert("Usuário ou Senha inválido(s)!");
