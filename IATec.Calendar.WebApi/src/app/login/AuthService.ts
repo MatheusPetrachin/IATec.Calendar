@@ -14,20 +14,41 @@ export class AuthService {
     private router: Router) { }
 
   showToolbarEmitter = new EventEmitter<boolean>();
+  showLoginLoader = new EventEmitter<boolean>();
 
   isLoggedIn(): boolean {
     this.showToolbarEmitter.emit(true);
     return localStorage.getItem('Authorization') !== null;
   }
 
-  getToken(credentials: UserModel): Observable<UserModel> {
+  login(credentials: UserModel): void {
+    this.showLoginLoader.emit(true);
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
     this.showToolbarEmitter.emit(true);
 
-    return this.http.post<UserModel>(`${this.configService.apiUrl}/Login`, credentials, { headers })
+    this.http.post<UserModel>(`${this.configService.apiUrl}/Login`, credentials, { headers }).subscribe({
+      next: (response) => {
+        localStorage.setItem('UserName', response.name)
+        localStorage.setItem('Authorization', 'Bearer ' + response.token)
+        this.router.navigate(['/home']);
+      },
+      error: (erro) => {
+        console.log(erro.message);
+
+        if (erro.status === 404) {
+          alert("Usuário ou Senha inválido(s)!");
+        } else {
+          alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+        }
+      }
+    });
+
+    this.showToolbarEmitter.emit(true);
+    this.showLoginLoader.emit(false);
   }
 
   logout() {

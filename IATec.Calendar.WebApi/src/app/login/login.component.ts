@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
+  loading: boolean = false;
   form: FormGroup;
 
   constructor(private authService: AuthService,
@@ -21,29 +23,23 @@ export class LoginComponent {
     })
   }
 
+  ngOnInit() {
+    this.authService.showLoginLoader.subscribe(
+      show => {
+        console.log(show);
+        this.loading = show
+      }
+    );
+  }
+
   submit() {
     var user = this.form.value as UserModel;
 
     if (this.form.valid) {
-      this.authService.getToken(user)
-        .subscribe({
-          next: (response) => {
-            localStorage.setItem('UserName', response.name)
-            localStorage.setItem('Authorization', 'Bearer ' + response.token)
-            this.router.navigate(['/home']);
-          },
-          error: (erro) => {
-            console.log(erro.message);
-
-            if (erro.status === 404) {
-              alert("Usuário ou Senha inválido(s)!");
-            } else {
-              alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
-            }
-          }
-        });
+      this.authService.login(user);
     }
   }
+
   @Input() error!: string | null;
 
   @Output() submitEM = new EventEmitter();

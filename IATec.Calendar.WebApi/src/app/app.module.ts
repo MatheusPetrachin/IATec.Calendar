@@ -29,6 +29,8 @@ import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { MatOptionModule } from '@angular/material/core';
     MatListModule,
     FlexLayoutModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatTabsModule,
+    MatProgressBarModule
   ],
   providers: [AuthService, AuthGuardService, ApiConfigServiceService, HttpClient, { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },],
   bootstrap: [AppComponent]

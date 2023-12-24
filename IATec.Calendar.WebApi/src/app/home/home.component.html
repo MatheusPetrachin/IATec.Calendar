@@ -6,35 +6,41 @@
 
     <br />
     <div class="custom-divider"></div>
-
-    <br />
-    <div>
-        <button mat-raised-button color="primary" (click)="redirect('events')">+</button>
-    </div>
     <br />
 
-    <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource">
+    <mat-tab-group class="col-12">
+        <mat-tab label="First">
+            <div>
+                <button mat-raised-button color="primary" (click)="redirect('events')">+</button>
+            </div>
+            <br />
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="eventDate">
-                <th mat-header-cell *matHeaderCellDef> Data </th>
-                <td mat-cell *matCellDef="let element"> {{element.eventDate}} </td>
-            </ng-container>
+            <div class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource">
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="eventDate">
+                        <th mat-header-cell *matHeaderCellDef> Data </th>
+                        <td mat-cell *matCellDef="let element"> {{element.eventDate}} </td>
+                    </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
-            aria-label="Select page of periodic elements">
-        </mat-paginator>
-    </div>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+        </mat-tab>
+        <mat-tab label="Second"> Content 2 </mat-tab>
+    </mat-tab-group>
+
 
 </div>
