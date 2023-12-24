@@ -1,4 +1,5 @@
 export class EventModel {
+    public id!: string;
     public name!: string;
     public description!: string;
     public startDate!: Date;

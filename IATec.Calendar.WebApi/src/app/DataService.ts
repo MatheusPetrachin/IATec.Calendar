@@ -28,16 +28,15 @@ export class DataService {
     return this.http.get<EventModel[]>(this.configService.apiUrl + "/Events", { headers });
   }
 
-  SelectUsers(): Observable<UserModel[]> {
+  getEventById(id: string): Observable<EventModel> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('Authorization') ?? ''
     });
-
-    return this.http.get<UserModel[]>(this.configService.apiUrl + "/Users/All", { headers });
+    return this.http.get<EventModel>(this.configService.apiUrl + "/Events/" + id, { headers });
   }
 
-  CreateEvent(event: EventModel): void {
+  createEvent(event: EventModel): void {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('Authorization') ?? '',
@@ -57,5 +56,14 @@ export class DataService {
         this.loadingFormsEventEmitter.emit(false);
       }
     });
+  }
+
+  selectUsers(): Observable<UserModel[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('Authorization') ?? ''
+    });
+
+    return this.http.get<UserModel[]>(this.configService.apiUrl + "/Users/All", { headers });
   }
 }

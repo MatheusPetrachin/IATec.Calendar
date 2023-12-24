@@ -16,8 +16,9 @@ interface selectModel {
 })
 export class EventsComponent {
   @Input() action: string = "";
+  @Input() eventModel: EventModel | null = null;
 
-  form: FormGroup;
+  form!: FormGroup;
   toppings = new FormControl('');
   toppingList!: UserModel[];
   selectedParticipants!: string[];
@@ -30,19 +31,6 @@ export class EventsComponent {
   loading: boolean | null = false;
 
   constructor(private router: Router, private dataService: DataService, private _formBuilder: FormBuilder) {
-    this.form = this._formBuilder.group({
-      name: ['', [Validators.required]],
-      description: ['', Validators.required],
-      startDate: [Date, Validators.required],
-      endDate: [Date, Validators.required],
-      localization: ['', Validators.required],
-      startHour: [this.startHour, Validators.required],
-      startMinute: [this.startMinute, Validators.required],
-      endHour: [this.endHour, Validators.required],
-      endMinute: [this.endMinute, Validators.required],
-      participants: [this.selectedParticipants, Validators.required]
-    })
-
     this.getHours();
     this.getMinutes();
     this.getParticipants();
@@ -54,6 +42,22 @@ export class EventsComponent {
         this.loading = show
       }
     );
+
+    console.log(this.eventModel);
+
+    this.form = new FormGroup({
+      id: new FormControl(this.eventModel ? this.eventModel.id : null),
+      name: new FormControl(this.eventModel ? this.eventModel.name : '', [Validators.required]),
+      description: new FormControl(this.eventModel ? this.eventModel.description : '', Validators.required),
+      startDate: new FormControl(this.eventModel ? this.eventModel.startDate : '', Validators.required),
+      endDate: new FormControl(this.eventModel ? this.eventModel.endDate : '', Validators.required),
+      localization: new FormControl(this.eventModel ? this.eventModel.localization : '', Validators.required),
+      startHour: new FormControl(this.startHour, Validators.required),
+      startMinute: new FormControl(this.startMinute, Validators.required),
+      endHour: new FormControl(this.endHour, Validators.required),
+      endMinute: new FormControl(this.endMinute, Validators.required),
+      participants: new FormControl(this.selectedParticipants, Validators.required)
+    });
   }
 
   private getHours(): void {
@@ -69,7 +73,7 @@ export class EventsComponent {
   }
 
   private getParticipants(): void {
-    this.dataService.SelectUsers().subscribe({
+    this.dataService.selectUsers().subscribe({
       next: (response) => {
         this.toppingList = response;
       },
@@ -98,11 +102,11 @@ export class EventsComponent {
   }
 
   submit() {
-    this.dataService.loadingFormsEventEmitter.emit(true);
     var event = this.form.value as EventModel;
 
     if (this.form.valid) {
-      this.dataService.CreateEvent(event);
+      this.dataService.loadingFormsEventEmitter.emit(true);
+      this.dataService.createEvent(event);
     }
   }
 

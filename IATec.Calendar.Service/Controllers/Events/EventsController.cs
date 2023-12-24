@@ -54,6 +54,27 @@ namespace IATec.Calendar.Controllers.Events
             }
         }
 
+        /// <summary>
+        /// Get Events.
+        /// </summary>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            try
+            {
+                var events = await _context.Events.Where(x => x.Id == id).FirstOrDefaultAsync();
+                return Ok(events);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -29,7 +29,7 @@ export class HomeComponent {
     if (id === null)
       this.router.navigate(['/' + page]);
     else
-      this.router.navigate(['/' + page + '/:' + id]);
+      this.router.navigate(['/events/edit', id]);
   }
 
   obterDataAtual() {
