@@ -17,6 +17,7 @@ export class HomeComponent {
 
   dataSource: MatTableDataSource<EventModel> = new MatTableDataSource();
   displayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
+  resultsLength = 0;
 
   date: Date = new Date();
 
@@ -41,6 +42,7 @@ export class HomeComponent {
       .subscribe({
         next: (response) => {
           this.dataSource = new MatTableDataSource(response);
+          this.resultsLength = response.length;
         },
         error: (erro) => {
           console.log(erro.message);
