@@ -14,23 +14,22 @@ namespace IATec.Calendar.Domain.Users.Handlers
     {
         private readonly ILogger<UserHandler> _logger;
         private readonly Context _context;
+        private readonly IUsersRepository _repository;
 
         public UserHandler(Context context,
+                           IUsersRepository repository,
                            ILogger<UserHandler> logger)
         {
             _context = context;
+            _repository = repository;
             _logger = logger;
         }
-
 
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                UserEntityDomain userEntityDomain = request.ToEntity();
-
-                _context.Users.Add(userEntityDomain);
-                _context.SaveChanges();
+                await _repository.CreateAsync(request.ToEntity());
 
                 return Unit.Value;
             }

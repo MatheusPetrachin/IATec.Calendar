@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../DataService';
+import { UserModel } from '../models/usermodel';
 
 interface selectModel {
   value: number;
@@ -17,12 +18,12 @@ export class EventsComponent {
   constructor(private router: Router, private dataService: DataService) {
     this.getHours();
     this.getMinutes();
-    //pegar usaurios para popular select
+    this.loadToppings();
   }
 
   toppings = new FormControl('');
 
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  toppingList!: UserModel[];
   hours: selectModel[] = [];
   minutes: selectModel[] = [];
 
@@ -37,6 +38,18 @@ export class EventsComponent {
       this.minutes.push({ value: i, viewValue: i.toString() });
     }
   }
+
+  private loadToppings(): void {
+    this.dataService.SelectUsers().subscribe({
+      next: (response) => {
+        this.toppingList = response;
+      },
+      error: (erro) => {
+        console.log(erro.message);
+      }
+    });
+  }
+
 
   redirect(page: string) {
     this.router.navigate(['/' + page]);

@@ -89,7 +89,7 @@ namespace IATec.Calendar
             services.AddScoped<Context>();
 
             services.AddScoped<UserHandler>();
-            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
 
             services.AddScoped<EventsHandler>();
             services.AddScoped<IEventsRepository, EventsRepository>();

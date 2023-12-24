@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Login.Commands;
 using IATec.Calendar.Domain.Login.Constants;
 using IATec.Calendar.Domain.Login.Response;
-using IATec.Calendar.Domain.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
