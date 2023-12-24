@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
+using IATec.Calendar.Domain.Events.Commands;
 using IATec.Calendar.Domain.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -38,12 +40,34 @@ namespace IATec.Calendar.Controllers.Events
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         public async Task<IActionResult> Get([FromHeader] Guid userId,
-                                              [FromHeader] DateTime period)
+                                             [FromHeader] DateTime period)
         {
             try
             {
                 var events = await _context.Events.Where(x => x.CreatedBy == userId && x.EventDate.Date == period.Date).ToListAsync();
                 return Ok(events);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPost]
+        public async Task<IActionResult> Post([FromHeader] Guid userId,
+                                              [FromBody] CreateEventsCommand command)
+        {
+            try
+            {
+                command.SetUserId(userId);
+
+                await _mediator.Send(command);
+
+                return Ok(command);
             }
             catch (Exception ex)
             {

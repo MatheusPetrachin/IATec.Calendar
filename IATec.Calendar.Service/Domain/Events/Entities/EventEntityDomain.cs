@@ -13,12 +13,9 @@ namespace IATec.Calendar.Domain.Events.Entities
         public EventEntityDomain(Guid id,
                                  string name,
                                  string description,
-                                 string street,
-                                 string number,
-                                 string neighborhood,
-                                 string city,
+                                 DateTime eventDate,
+                                 string localization,
                                  EStatus status,
-                                 Guid participantId,
                                  Guid createdBy,
                                  DateTime creatdAt,
                                  Guid? updatedBy,
@@ -27,12 +24,9 @@ namespace IATec.Calendar.Domain.Events.Entities
             Id = id;
             Name = name;
             Description = description;
-            Street = street;
-            Number = number;
-            Neighborhood = neighborhood;
-            City = city;
+            EventDate = eventDate;
             Status = status;
-            ParticipantId = participantId;
+            Localization = localization;
             CreatedBy = createdBy;
             CreatdAt = creatdAt;
             UpdatedBy = updatedBy;
@@ -42,18 +36,18 @@ namespace IATec.Calendar.Domain.Events.Entities
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public string Street { get; private set; }
-        public string Number { get; private set; }
-        public string Neighborhood { get; private set; }
-        public string City { get; private set; }
         public DateTime EventDate { get; private set; }
+        public string Localization { get; private set; }
         public EStatus Status { get; private set; }
-        public Guid ParticipantId { get; private set; }
         public Guid CreatedBy { get; private set; }
         public DateTime CreatdAt { get; private set; }
         public Guid? UpdatedBy { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
         public List<UserEventEntityDomain> Participants { get; set; }
+    }
+
+    internal class IgnoreColumnAttribute : Attribute
+    {
     }
 }

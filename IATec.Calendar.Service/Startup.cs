@@ -3,8 +3,10 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using IATec.Calendar.Domain;
+using IATec.Calendar.Domain.Events.Handlers;
 using IATec.Calendar.Domain.Login.Constants;
 using IATec.Calendar.Domain.Users.Handlers;
+using IATec.Calendar.InfraData.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -83,7 +85,15 @@ namespace IATec.Calendar
             });
 
             services.AddMediatR(typeof(Startup).Assembly);
+
+            services.AddScoped<Context>();
+
             services.AddScoped<UserHandler>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<EventsHandler>();
+            services.AddScoped<IEventsRepository, EventsRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
