@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../DataService';
 import { UserModel } from '../models/usermodel';
+import { EventModel } from '../models/eventmodel';
 
 interface selectModel {
   value: number;
@@ -15,17 +16,35 @@ interface selectModel {
 })
 export class EventsComponent {
 
-  constructor(private router: Router, private dataService: DataService) {
-    this.getHours();
-    this.getMinutes();
-    this.loadToppings();
-  }
-
+  form: FormGroup;
   toppings = new FormControl('');
-
   toppingList!: UserModel[];
+  selectedParticipants!: string[];
   hours: selectModel[] = [];
   minutes: selectModel[] = [];
+  startHour!: number;
+  startMinute!: number;
+  endHour!: number;
+  endMinute!: number;
+
+  constructor(private router: Router, private dataService: DataService, private _formBuilder: FormBuilder) {
+    this.form = this._formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', Validators.required],
+      startDate: [Date, Validators.required],
+      endDate: [Date, Validators.required],
+      localization: ['', Validators.required],
+      startHour: [this.startHour, Validators.required],
+      startMinute: [this.startMinute, Validators.required],
+      endHour: [this.endHour, Validators.required],
+      endMinute: [this.endMinute, Validators.required],
+      participants: [this.selectedParticipants, Validators.required]
+    })
+
+    this.getHours();
+    this.getMinutes();
+    this.getParticipants();
+  }
 
   private getHours(): void {
     for (let i = 0; i <= 23; i++) {
@@ -39,7 +58,7 @@ export class EventsComponent {
     }
   }
 
-  private loadToppings(): void {
+  private getParticipants(): void {
     this.dataService.SelectUsers().subscribe({
       next: (response) => {
         this.toppingList = response;
@@ -50,6 +69,29 @@ export class EventsComponent {
     });
   }
 
+  selectHour(typeHour: string, hour: number) {
+    if (typeHour === 'start')
+      this.startHour = hour;
+    else
+      this.endHour = hour
+  }
+
+  selectMinute(typeMinute: string, minute: number) {
+    if (typeMinute === 'start')
+      this.startMinute = minute;
+    else
+      this.endMinute = minute
+  }
+
+  selectParticipants(participants: string[]) {
+    this.selectedParticipants = participants
+  }
+
+  submit() {
+    var event = this.form.value as EventModel;
+
+    console.log(event)
+  }
 
   redirect(page: string) {
     this.router.navigate(['/' + page]);
