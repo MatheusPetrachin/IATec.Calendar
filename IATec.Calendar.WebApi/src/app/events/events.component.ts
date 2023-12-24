@@ -15,7 +15,7 @@ interface selectModel {
   styleUrl: './events.component.scss'
 })
 export class EventsComponent {
-  @Input() action: string = "";
+  @Input() action: boolean = false;
   @Input() eventModel: EventModel | null = null;
 
   form!: FormGroup;
@@ -102,12 +102,16 @@ export class EventsComponent {
     this.selectedParticipants = participants
   }
 
-  submit() {
+  submit(isEdit: boolean) {
     var event = this.form.value as EventModel;
 
     if (this.form.valid) {
       this.dataService.loadingFormsEventEmitter.emit(true);
-      this.dataService.createEvent(event);
+
+      if (isEdit)
+        this.dataService.updateEvent(event);
+      else
+        this.dataService.createEvent(event);
     }
   }
 

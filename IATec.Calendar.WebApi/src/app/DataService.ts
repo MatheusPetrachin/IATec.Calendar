@@ -59,6 +59,10 @@ export class DataService {
     });
   }
 
+  updateEvent(event: EventModel) {
+    console.log("UPDATE");
+  }
+
   deleteEvent(id: string): void {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

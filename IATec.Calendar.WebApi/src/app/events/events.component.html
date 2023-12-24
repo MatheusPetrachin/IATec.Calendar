@@ -1,12 +1,12 @@
 <mat-card class="container col-6">
     <mat-card-header>
-        <mat-card-title>{{action}} Evento</mat-card-title>
+        <mat-card-title>{{action ? 'Cadastrar' : 'Atualizar'}} Evento</mat-card-title>
         <mat-card-subtitle>preencha o formulário</mat-card-subtitle>
     </mat-card-header>
 
     <br />
 
-    <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+    <form class="login-form" [formGroup]="form" (ngSubmit)="submit(action)">
         <mat-form-field class="col-12">
             <mat-label>Nome do evento</mat-label>
             <input formControlName="id" hidden>
@@ -96,7 +96,8 @@
         </mat-form-field>
 
         <mat-card-actions class="col-12 container">
-            <button mat-raised-button color="primary" class="col-6" type="submit">{{action}}</button>
+            <button mat-raised-button color="primary" class="col-6" type="submit">{{action ? 'Cadastrar' :
+                'Atualizar'}}</button>
             <br />
             <button mat-raised-button class="col-6" (click)="redirect('home')">Cancelar</button>
         </mat-card-actions>

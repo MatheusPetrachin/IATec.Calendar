@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UpdateEventsComponent {
   eventModel!: EventModel;
-  action = "Atualizar"
+  create = false;
   eventId: string | null = null;
 
   constructor(private dataService: DataService, private route: ActivatedRoute) {

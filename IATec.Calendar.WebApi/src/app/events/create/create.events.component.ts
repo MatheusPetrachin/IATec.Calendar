@@ -7,5 +7,5 @@ import { EventsComponent } from '../events.component';
   styleUrl: './create.events.component.scss',
 })
 export class CreateEventsComponent {
-  action = "Adicionar"
+  create = true;
 }
