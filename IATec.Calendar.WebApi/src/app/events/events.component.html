@@ -35,8 +35,7 @@
             <mat-label for="startHour">Hora</mat-label>
             <mat-select name="startHour" id="startHour" formControlName="startHour">
                 @for (hour of hours; track hour) {
-                <mat-option [value]="hour.value"
-                    (selectionChange)="selectHour('start', hour.value)">{{hour.viewValue}}</mat-option>
+                <mat-option [value]="hour.value">{{hour.viewValue.toString().padStart(2, '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -44,7 +43,7 @@
             <mat-label for="startMinute">Minuto</mat-label>
             <mat-select name="startMinute" id="startMinute" formControlName="startMinute">
                 @for (minute of minutes; track minute) {
-                <mat-option [value]="minute.value">{{minute.viewValue}}</mat-option>
+                <mat-option [value]="minute.value">{{minute.viewValue.toString().padStart(2, '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -67,7 +66,7 @@
             <mat-label for="endHour">Hora</mat-label>
             <mat-select name="endHour" id="endHour" formControlName="endHour">
                 @for (hour of hours; track hour) {
-                <mat-option [value]="hour.value">{{hour.viewValue}}</mat-option>
+                <mat-option [value]="hour.value">{{hour.viewValue.toString().padStart(2, '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -75,7 +74,7 @@
             <mat-label for="endMinute">Minuto</mat-label>
             <mat-select name="endMinute" id="endMinute" formControlName="endMinute">
                 @for (minute of minutes; track minute) {
-                <mat-option [value]="minute.value">{{minute.viewValue}}</mat-option>
+                <mat-option [value]="minute.value">{{minute.viewValue.toString().padStart(2, '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
