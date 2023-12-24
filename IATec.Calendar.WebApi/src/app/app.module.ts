@@ -33,13 +33,17 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { CreateEventsComponent } from './events/create/create.events.component';
+import { UpdateEventsComponent } from './events/update/update.events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    EventsComponent
+    EventsComponent,
+    CreateEventsComponent,
+    UpdateEventsComponent
   ],
   imports: [
     BrowserModule,

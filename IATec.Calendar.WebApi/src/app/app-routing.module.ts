@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './AuthGuardService';
-import { EventsComponent } from './events/events.component';
+import { CreateEventsComponent } from './events/create/create.events.component';
+import { UpdateEventsComponent } from './events/update/update.events.component';
 
 export const routes: Routes = [
   {
@@ -11,15 +12,10 @@ export const routes: Routes = [
     pathMatch: "full",
     redirectTo: "login"
   },
-  {
-    path: "login", component: LoginComponent
-  },
-  {
-    path: "home", component: HomeComponent, canActivate: [AuthGuardService],
-  },
-  {
-    path: "events", component: EventsComponent, canActivate: [AuthGuardService],
-  }
+  { path: "login", component: LoginComponent },
+  { path: "home", component: HomeComponent, canActivate: [AuthGuardService] },
+  { path: "events/new", component: CreateEventsComponent, canActivate: [AuthGuardService] },
+  { path: "events/edit/:id", component: UpdateEventsComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

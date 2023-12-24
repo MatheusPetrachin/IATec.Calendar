@@ -25,8 +25,11 @@ export class HomeComponent {
     this.loadData(this.date)
   }
 
-  redirect(page: string) {
-    this.router.navigate(['/' + page]);
+  redirect(page: string, id: string | null) {
+    if (id === null)
+      this.router.navigate(['/' + page]);
+    else
+      this.router.navigate(['/' + page + '/:' + id]);
   }
 
   obterDataAtual() {

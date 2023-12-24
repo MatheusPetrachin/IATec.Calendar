@@ -1,6 +1,6 @@
 <mat-card class="container col-6">
     <mat-card-header>
-        <mat-card-title>Adicionar Evento</mat-card-title>
+        <mat-card-title>{{action}} Evento</mat-card-title>
         <mat-card-subtitle>preencha o formulário</mat-card-subtitle>
     </mat-card-header>
 
@@ -95,7 +95,7 @@
         </mat-form-field>
 
         <mat-card-actions class="col-12 container">
-            <button mat-raised-button color="primary" class="col-6" type="submit">Adicionar</button>
+            <button mat-raised-button color="primary" class="col-6" type="submit">{{action}}</button>
             <br />
             <button mat-raised-button class="col-6" (click)="redirect('home')">Cancelar</button>
         </mat-card-actions>

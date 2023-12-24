@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../DataService';
@@ -15,6 +15,7 @@ interface selectModel {
   styleUrl: './events.component.scss'
 })
 export class EventsComponent {
+  @Input() action: string = "";
 
   form: FormGroup;
   toppings = new FormControl('');
