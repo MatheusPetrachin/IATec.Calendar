@@ -52,12 +52,13 @@ export class EventsComponent {
       startDate: new FormControl(this.eventModel ? this.eventModel.startDate : '', Validators.required),
       endDate: new FormControl(this.eventModel ? this.eventModel.endDate : '', Validators.required),
       localization: new FormControl(this.eventModel ? this.eventModel.localization : '', Validators.required),
-      startHour: new FormControl(this.startHour, Validators.required),
-      startMinute: new FormControl(this.startMinute, Validators.required),
-      endHour: new FormControl(this.endHour, Validators.required),
-      endMinute: new FormControl(this.endMinute, Validators.required),
-      participants: new FormControl(this.selectedParticipants, Validators.required)
+      startHour: new FormControl(this.eventModel ? this.eventModel.startHour : '', Validators.required),
+      startMinute: new FormControl(this.eventModel ? this.eventModel.startMinute : '', Validators.required),
+      endHour: new FormControl(this.eventModel ? this.eventModel.endHour : '', Validators.required),
+      endMinute: new FormControl(this.eventModel ? this.eventModel.endMinute : '', Validators.required),
+      participantIds: new FormControl(this.eventModel ? this.eventModel.participantIds : '', Validators.required)
     });
+
   }
 
   private getHours(): void {

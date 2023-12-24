@@ -15,6 +15,7 @@ namespace IATec.Calendar.Domain
 
         public DbSet<UserEntityDomain> Users { get; set; }
         public DbSet<EventEntityDomain> Events { get; set; }
+        public DbSet<UserEventEntityDomain> UserEvents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

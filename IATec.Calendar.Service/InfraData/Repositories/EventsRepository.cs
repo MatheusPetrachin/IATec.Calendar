@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Entities;
 using IATec.Calendar.Domain.Events.Handlers;
+using IATec.Calendar.Domain.UserEvents.Entities;
 using Microsoft.Extensions.Logging;
 
 namespace IATec.Calendar.InfraData.Repositories
@@ -23,6 +24,9 @@ namespace IATec.Calendar.InfraData.Repositories
             try
             {
                 _context.Events.Add(entity);
+
+                foreach (var participant in entity.Participants)
+                    _context.UserEvents.Add(participant);
 
                 await _context.SaveChangesAsync();
             }

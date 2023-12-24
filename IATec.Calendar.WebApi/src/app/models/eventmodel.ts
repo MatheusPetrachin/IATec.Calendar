@@ -9,5 +9,5 @@ export class EventModel {
     public startMinute!: number;
     public endHour!: number;
     public endMinute!: number;
-    public participants!: string[]
+    public participantIds!: string[]
 }

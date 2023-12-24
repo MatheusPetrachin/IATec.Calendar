@@ -46,8 +46,7 @@ namespace IATec.Calendar.Domain.Events.Entities
         public DateTime CreatdAt { get; private set; }
         public Guid? UpdatedBy { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
-
-        public List<UserEventEntityDomain> Participants { get; set; }
+        public List<UserEventEntityDomain> Participants { get; set; } = new List<UserEventEntityDomain>();
     }
 
     internal class IgnoreColumnAttribute : Attribute

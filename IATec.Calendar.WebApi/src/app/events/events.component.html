@@ -9,6 +9,7 @@
     <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
         <mat-form-field class="col-12">
             <mat-label>Nome do evento</mat-label>
+            <input formControlName="id" hidden>
             <input matInput formControlName="name">
         </mat-form-field>
 
@@ -87,7 +88,7 @@
 
         <mat-form-field class="col-12">
             <mat-label>Participantes do Evento</mat-label>
-            <mat-select formControlName="participants" multiple>
+            <mat-select formControlName="participantIds" multiple>
                 @for (topping of toppingList; track topping) {
                 <mat-option [value]="topping.id">{{topping.name}}</mat-option>
                 }

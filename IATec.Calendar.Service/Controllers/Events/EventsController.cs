@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Commands;
+using IATec.Calendar.Domain.Events.Models;
 using IATec.Calendar.Domain.Users.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -66,7 +67,22 @@ namespace IATec.Calendar.Controllers.Events
             try
             {
                 var events = await _context.Events.Where(x => x.Id == id).FirstOrDefaultAsync();
-                return Ok(events);
+                events.Participants = await _context.UserEvents.Where(x => x.EventId == id).ToListAsync();
+
+                return Ok(new SelectEvent()
+                {
+                    Id = events.Id,
+                    Name = events.Name,
+                    Description = events.Description,
+                    StartDate = events.StartDate,
+                    EndDate = events.EndDate,
+                    Localization = events.Localization,
+                    StartHour = events.StartDate.Hour,
+                    StartMinute = events.StartDate.Minute,
+                    EndHour = events.EndDate.Hour,
+                    EndMinute = events.EndDate.Minute,
+                    ParticipantIds = events.Participants.Select(x => x.UserId).ToList(),
+                });
             }
             catch (Exception ex)
             {
@@ -85,6 +101,7 @@ namespace IATec.Calendar.Controllers.Events
             try
             {
                 command.SetUserId(userId);
+                command.UpdatePeriod();
 
                 await _mediator.Send(command);
 

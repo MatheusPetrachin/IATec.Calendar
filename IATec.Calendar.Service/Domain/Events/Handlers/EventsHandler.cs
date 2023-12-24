@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain.Events.Commands;
 using IATec.Calendar.Domain.Events.Handlers;
+using IATec.Calendar.Domain.UserEvents.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -24,7 +25,18 @@ namespace IATec.Calendar.Domain.Users.Handlers
         {
             try
             {
-                await _eventsRepository.CreateAsync(request.ToEntity());
+                var entity = request.ToEntity();
+
+                request.ParticipantIds?.ForEach(userId =>
+                {
+                    entity.Participants.Add(new UserEventEntityDomain()
+                    {
+                        EventId = entity.Id,
+                        UserId = userId
+                    });
+                });
+
+                await _eventsRepository.CreateAsync(entity);
 
                 return Unit.Value;
             }
