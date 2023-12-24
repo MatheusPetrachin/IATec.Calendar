@@ -10,10 +10,18 @@
 
     <mat-tab-group class="col-12">
         <mat-tab label="Eventos Confirmados">
-            <div class="col-12 align-items-right">
-                <button mat-raised-button color="primary" (click)="redirect('events')">+</button>
+
+            <br />
+            <div class="div-add-event col-12">
+                <button mat-raised-button color="primary" class="col-2" (click)="redirect('events')">Criar
+                    Eventos</button>
             </div>
             <br />
+
+            <mat-form-field class="col-12">
+                <mat-label>Filtro</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
 
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">
@@ -66,6 +74,6 @@
         </mat-tab>
         <mat-tab label="Convites"> Content 2 </mat-tab>
     </mat-tab-group>
-
-
 </div>
+
+<p-toast></p-toast>

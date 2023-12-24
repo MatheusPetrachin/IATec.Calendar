@@ -1,8 +1,12 @@
-import { UserModel } from "./usermodel";
-
 export class EventModel {
-    public eventDate!: Date;
     public name!: string;
-    public location!: string;
-    public participants!: UserModel[]
+    public description!: string;
+    public startDate!: Date;
+    public endDate!: Date;
+    public localization!: string;
+    public startHour!: number;
+    public startMinute!: number;
+    public endHour!: number;
+    public endMinute!: number;
+    public participants!: string[]
 }

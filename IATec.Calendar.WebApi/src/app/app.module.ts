@@ -31,6 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -65,9 +67,17 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatSelectModule,
     MatOptionModule,
     MatTabsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    ToastModule
   ],
-  providers: [AuthService, AuthGuardService, ApiConfigServiceService, HttpClient, { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },],
+  providers: [
+    AuthService,
+    AuthGuardService,
+    ApiConfigServiceService,
+    HttpClient,
+    MessageService,
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

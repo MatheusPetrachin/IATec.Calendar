@@ -53,3 +53,12 @@ table {
     margin-bottom: 10px;
     /* Espaçamento inferior */
 }
+
+.div-add-event {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Isso garante que a div ocupe a altura total da tela */
+}

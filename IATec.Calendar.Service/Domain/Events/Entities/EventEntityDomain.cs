@@ -13,7 +13,8 @@ namespace IATec.Calendar.Domain.Events.Entities
         public EventEntityDomain(Guid id,
                                  string name,
                                  string description,
-                                 DateTime eventDate,
+                                 DateTime startDate,
+                                 DateTime endDate,
                                  string localization,
                                  EStatus status,
                                  Guid createdBy,
@@ -24,7 +25,8 @@ namespace IATec.Calendar.Domain.Events.Entities
             Id = id;
             Name = name;
             Description = description;
-            EventDate = eventDate;
+            StartDate = startDate;
+            EndDate = endDate;
             Status = status;
             Localization = localization;
             CreatedBy = createdBy;
@@ -36,7 +38,8 @@ namespace IATec.Calendar.Domain.Events.Entities
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public DateTime EventDate { get; private set; }
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
         public string Localization { get; private set; }
         public EStatus Status { get; private set; }
         public Guid CreatedBy { get; private set; }

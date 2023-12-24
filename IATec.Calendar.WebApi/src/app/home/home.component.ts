@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { EventModel } from '../models/eventmodel';
 import { DataService } from '../DataService';
 import { AuthService } from '../login/AuthService';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent {
     this.obterDataAtual()
   }
 
-  dataSource: EventModel[] = [];
+  dataSource: MatTableDataSource<EventModel> = new MatTableDataSource();
   displayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
 
   date: Date = new Date();
@@ -36,7 +37,7 @@ export class HomeComponent {
     this.dataService.getListEventData(localStorage.getItem('UserId') ?? '', date)
       .subscribe({
         next: (response) => {
-          this.dataSource = response;
+          this.dataSource = new MatTableDataSource(response);
         },
         error: (erro) => {
           console.log(erro.message);
@@ -59,5 +60,14 @@ export class HomeComponent {
 
   deleteItem(item: any): void {
     // Implement your delete logic here
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

@@ -26,6 +26,7 @@ export class EventsComponent {
   startMinute!: number;
   endHour!: number;
   endMinute!: number;
+  loading: boolean | null = false;
 
   constructor(private router: Router, private dataService: DataService, private _formBuilder: FormBuilder) {
     this.form = this._formBuilder.group({
@@ -44,6 +45,14 @@ export class EventsComponent {
     this.getHours();
     this.getMinutes();
     this.getParticipants();
+  }
+
+  ngOnInit() {
+    this.dataService.loadingFormsEventEmitter.subscribe(
+      show => {
+        this.loading = show
+      }
+    );
   }
 
   private getHours(): void {
@@ -88,9 +97,12 @@ export class EventsComponent {
   }
 
   submit() {
+    this.dataService.loadingFormsEventEmitter.emit(true);
     var event = this.form.value as EventModel;
 
-    console.log(event)
+    if (this.form.valid) {
+      this.dataService.CreateEvent(event);
+    }
   }
 
   redirect(page: string) {
