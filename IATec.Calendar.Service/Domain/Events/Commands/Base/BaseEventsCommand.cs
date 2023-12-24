@@ -17,6 +17,9 @@ namespace IATec.Calendar.Domain.Events.Commands.Base
         public List<Guid> ParticipantIds { get; set; }
         public string Localization { get; set; }
 
+        public Guid Id { get; private set; }
+        public void SetId(Guid value) => Id = value;
+
         public Guid UserId { get; private set; }
         public void SetUserId(Guid value) => UserId = value;
 

@@ -45,7 +45,7 @@ namespace IATec.Calendar.Controllers.Events
         {
             try
             {
-                var events = await _context.Events.Where(x => x.CreatedBy == userId && x.StartDate.Date == period.Date).ToListAsync();
+                var events = await _context.Events.Where(x => x.CreatedBy == userId && x.StartDate.Date == period.Date && !x.Deleted).ToListAsync();
                 return Ok(events);
             }
             catch (Exception ex)
@@ -102,6 +102,30 @@ namespace IATec.Calendar.Controllers.Events
             {
                 command.SetUserId(userId);
                 command.UpdatePeriod();
+
+                await _mediator.Send(command);
+
+                return Ok(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id, [FromHeader] Guid userId)
+        {
+            try
+            {
+                DeleteEventsCommand command = new DeleteEventsCommand();
+                command.SetId(id);
+                command.DeletedAt = DateTime.Now;
+                command.DeletedBy = userId;
 
                 await _mediator.Send(command);
 

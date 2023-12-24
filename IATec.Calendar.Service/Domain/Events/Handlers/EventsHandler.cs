@@ -9,7 +9,8 @@ using Microsoft.Extensions.Logging;
 
 namespace IATec.Calendar.Domain.Users.Handlers
 {
-    public class EventsHandler : IRequestHandler<CreateEventsCommand>
+    public class EventsHandler : IRequestHandler<CreateEventsCommand>,
+                                 IRequestHandler<DeleteEventsCommand>
     {
         private ILogger<EventsHandler> _logger;
         public IEventsRepository _eventsRepository;
@@ -37,6 +38,21 @@ namespace IATec.Calendar.Domain.Users.Handlers
                 });
 
                 await _eventsRepository.CreateAsync(entity);
+
+                return Unit.Value;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return Unit.Value;
+            }
+        }
+
+        public async Task<Unit> Handle(DeleteEventsCommand request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await _eventsRepository.DeleteAsync(request);
 
                 return Unit.Value;
             }

@@ -20,7 +20,9 @@ namespace IATec.Calendar.Domain.Events.Entities
                                  Guid createdBy,
                                  DateTime creatdAt,
                                  Guid? updatedBy,
-                                 DateTime? updatedAt)
+                                 DateTime? updatedAt,
+                                 Guid? deletedBy = null,
+                                 DateTime? deletedAt = null)
         {
             Id = id;
             Name = name;
@@ -33,6 +35,8 @@ namespace IATec.Calendar.Domain.Events.Entities
             CreatdAt = creatdAt;
             UpdatedBy = updatedBy;
             UpdatedAt = updatedAt;
+            DeletedBy = deletedBy;
+            DeletedAt = deletedAt;
         }
 
         public Guid Id { get; private set; }
@@ -46,6 +50,15 @@ namespace IATec.Calendar.Domain.Events.Entities
         public DateTime CreatdAt { get; private set; }
         public Guid? UpdatedBy { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
+        public bool Deleted { get; set; } = false;
+        public Guid? DeletedBy { get; private set; }
+        public DateTime? DeletedAt { get; private set; }
+        public void SetDeleted(Guid? userId, DateTime? date)
+        {
+            DeletedBy = userId;
+            DeletedAt = date;
+            Deleted = true;
+        }
         public List<UserEventEntityDomain> Participants { get; set; } = new List<UserEventEntityDomain>();
     }
 

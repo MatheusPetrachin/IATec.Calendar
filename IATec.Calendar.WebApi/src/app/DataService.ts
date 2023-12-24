@@ -58,6 +58,28 @@ export class DataService {
     });
   }
 
+  deleteEvent(id: string): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('Authorization') ?? '',
+      'UserId': localStorage.getItem('UserId') ?? ''
+    });
+
+    this.http.delete(this.configService.apiUrl + "/Events/" + id, { headers }).subscribe({
+      next: (response) => {
+        console.log('Sucesso');
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sucesso!' });
+        this.loadingFormsEventEmitter.emit(false);
+        this.router.navigate(['/home']);
+      },
+      error: (erro) => {
+        console.log('erro');
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erro!' });
+        this.loadingFormsEventEmitter.emit(false);
+      }
+    });
+  }
+
   selectUsers(): Observable<UserModel[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

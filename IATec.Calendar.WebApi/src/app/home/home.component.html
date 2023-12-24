@@ -57,7 +57,7 @@
                             <button mat-icon-button (click)="redirect('events/edit', element.id)">
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button (click)="deleteItem(element)">
+                            <button mat-icon-button (click)="deleteItem(element.id)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
@@ -75,5 +75,3 @@
         <mat-tab label="Convites"> Content 2 </mat-tab>
     </mat-tab-group>
 </div>
-
-<p-toast></p-toast>
