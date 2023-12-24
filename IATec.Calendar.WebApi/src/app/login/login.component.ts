@@ -24,10 +24,8 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    this.authService.showLoginLoader.emit(false);
     this.authService.showLoginLoader.subscribe(
       show => {
-        console.log("Login Loader Show:" + show);
         this.loading = show
       }
     );

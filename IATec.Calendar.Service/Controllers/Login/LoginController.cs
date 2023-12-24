@@ -49,7 +49,7 @@ namespace IATec.Calendar.Controllers.Login
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.Equals(command.Email) && x.Password.Equals(command.Password));
 
                 //timer só para poder ver a barrinha de carregamento no login funcionar
-                Thread.Sleep(2500);
+                Thread.Sleep(1500);
 
                 if (user != null)
                 {

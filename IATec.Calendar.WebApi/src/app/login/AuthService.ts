@@ -32,6 +32,7 @@ export class AuthService {
         localStorage.setItem('UserName', response.name)
         localStorage.setItem('Authorization', 'Bearer ' + response.token)
         this.router.navigate(['/home']);
+        this.showLoginLoader.emit(false);
       },
       error: (erro) => {
         console.log(erro.message);
@@ -41,6 +42,8 @@ export class AuthService {
         } else {
           alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
+
+        this.showLoginLoader.emit(false);
       }
     });
   }
