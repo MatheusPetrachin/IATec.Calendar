@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Login.Commands;
@@ -46,6 +47,9 @@ namespace IATec.Calendar.Controllers.Login
             try
             {
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.Email.Equals(command.Email) && x.Password.Equals(command.Password));
+
+                //timer só para poder ver a barrinha de carregamento no login funcionar
+                Thread.Sleep(2500);
 
                 if (user != null)
                 {

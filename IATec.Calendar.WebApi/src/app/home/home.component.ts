@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventModel } from '../models/eventmodel';
 import { DataService } from '../DataService';
+import { AuthService } from '../login/AuthService';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { DataService } from '../DataService';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(private router: Router, private dataService: DataService, private authService: AuthService) {
     this.obterDataAtual()
   }
 
@@ -19,6 +20,7 @@ export class HomeComponent {
   date: Date = new Date();
 
   ngOnInit() {
+    this.authService.showToolbarEmitter.emit(true);
     this.loadData(this.date)
   }
 
@@ -31,11 +33,10 @@ export class HomeComponent {
   }
 
   loadData(date: Date): void {
-    this.dataService.getListEventData('ec524a4b-c201-44b4-8dd1-ad03e29a3ee6', date)
+    this.dataService.getListEventData(localStorage.getItem('UserId') ?? '', date)
       .subscribe({
         next: (response) => {
           this.dataSource = response;
-          console.log("Resposnse: ")
         },
         error: (erro) => {
           console.log(erro.message);
@@ -59,7 +60,4 @@ export class HomeComponent {
   deleteItem(item: any): void {
     // Implement your delete logic here
   }
-
-
-
 }

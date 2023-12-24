@@ -24,15 +24,17 @@ export class LoginComponent {
   }
 
   ngOnInit() {
+    this.authService.showLoginLoader.emit(false);
     this.authService.showLoginLoader.subscribe(
       show => {
-        console.log(show);
+        console.log("Login Loader Show:" + show);
         this.loading = show
       }
     );
   }
 
   submit() {
+    this.authService.showLoginLoader.emit(true);
     var user = this.form.value as UserModel;
 
     if (this.form.valid) {

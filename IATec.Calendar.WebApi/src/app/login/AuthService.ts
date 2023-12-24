@@ -22,16 +22,13 @@ export class AuthService {
   }
 
   login(credentials: UserModel): void {
-    this.showLoginLoader.emit(true);
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
-    this.showToolbarEmitter.emit(true);
-
     this.http.post<UserModel>(`${this.configService.apiUrl}/Login`, credentials, { headers }).subscribe({
       next: (response) => {
+        localStorage.setItem('UserId', response.id)
         localStorage.setItem('UserName', response.name)
         localStorage.setItem('Authorization', 'Bearer ' + response.token)
         this.router.navigate(['/home']);
@@ -46,9 +43,6 @@ export class AuthService {
         }
       }
     });
-
-    this.showToolbarEmitter.emit(true);
-    this.showLoginLoader.emit(false);
   }
 
   logout() {
