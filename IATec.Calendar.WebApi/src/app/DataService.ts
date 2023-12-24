@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class DataService {
+  reloadTable = new EventEmitter<boolean>();
   loadingFormsEventEmitter = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient,
@@ -70,7 +71,7 @@ export class DataService {
         console.log('Sucesso');
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sucesso!' });
         this.loadingFormsEventEmitter.emit(false);
-        this.router.navigate(['/home']);
+        this.reloadTable.emit(true)
       },
       error: (erro) => {
         console.log('erro');

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventModel } from '../models/eventmodel';
 import { DataService } from '../DataService';
 import { AuthService } from '../login/AuthService';
@@ -11,7 +11,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  constructor(private router: Router, private dataService: DataService, private authService: AuthService) {
+
+  constructor(private router: Router, private dataService: DataService, private authService: AuthService, private activatedRoute: ActivatedRoute) {
     this.obterDataAtual()
   }
 
@@ -23,6 +24,15 @@ export class HomeComponent {
 
   ngOnInit() {
     this.authService.showToolbarEmitter.emit(true);
+
+    this.dataService.reloadTable.subscribe(
+      reload => {
+        if (reload) {
+          this.loadData(this.date)
+        }
+      }
+    );
+
     this.loadData(this.date)
   }
 
@@ -41,7 +51,7 @@ export class HomeComponent {
     this.dataService.getListEventData(localStorage.getItem('UserId') ?? '', date)
       .subscribe({
         next: (response) => {
-          this.dataSource = new MatTableDataSource(response);
+          this.dataSource.data = response;
           this.resultsLength = response.length;
         },
         error: (erro) => {
