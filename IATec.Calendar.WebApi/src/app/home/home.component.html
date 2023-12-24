@@ -9,8 +9,8 @@
     <br />
 
     <mat-tab-group class="col-12">
-        <mat-tab label="First">
-            <div>
+        <mat-tab label="Eventos Confirmados">
+            <div class="col-12 align-items-right">
                 <button mat-raised-button color="primary" (click)="redirect('events')">+</button>
             </div>
             <br />
@@ -18,16 +18,41 @@
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">
 
-                    <!-- Name Column -->
                     <ng-container matColumnDef="eventDate">
                         <th mat-header-cell *matHeaderCellDef> Data </th>
                         <td mat-cell *matCellDef="let element"> {{element.eventDate}} </td>
                     </ng-container>
 
-                    <!-- Name Column -->
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Name </th>
                         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="localization">
+                        <th mat-header-cell *matHeaderCellDef> Localização </th>
+                        <td mat-cell *matCellDef="let element"> {{element.localization}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button (click)="editItem(element)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="deleteItem(element)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -39,7 +64,7 @@
                 </mat-paginator>
             </div>
         </mat-tab>
-        <mat-tab label="Second"> Content 2 </mat-tab>
+        <mat-tab label="Convites"> Content 2 </mat-tab>
     </mat-tab-group>
 
 

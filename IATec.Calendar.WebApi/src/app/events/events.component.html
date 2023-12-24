@@ -17,7 +17,10 @@
             <input matInput>
         </mat-form-field>
 
-        <mat-form-field class="col-12">
+        <div class="col-12">
+            <span>Início</span>
+        </div>
+        <mat-form-field class="col-8">
             <mat-label>Data do evento</mat-label>
             <input matInput [matDatepicker]="datepicker">
             <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
@@ -27,6 +30,53 @@
                     <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
                 </mat-datepicker-actions>
             </mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <mat-label>Hora</mat-label>
+            <mat-select>
+                @for (hour of hours; track hour) {
+                <mat-option [value]="hour.value">{{hour.viewValue}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <mat-label>Minuto</mat-label>
+            <mat-select>
+                @for (minute of minutes; track minute) {
+                <mat-option [value]="minute.value">{{minute.viewValue}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <div class="col-12">
+            <span>Fim</span>
+        </div>
+        <mat-form-field class="col-8">
+            <mat-label>Data do evento</mat-label>
+            <input matInput [matDatepicker]="datepicker">
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <mat-label>Hora</mat-label>
+            <mat-select>
+                @for (hour of hours; track hour) {
+                <mat-option [value]="hour.value">{{hour.viewValue}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-2">
+            <mat-label>Minuto</mat-label>
+            <mat-select>
+                @for (minute of minutes; track minute) {
+                <mat-option [value]="minute.value">{{minute.viewValue}}</mat-option>
+                }
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-12">

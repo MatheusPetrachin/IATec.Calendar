@@ -14,7 +14,7 @@ export class HomeComponent {
   }
 
   dataSource: EventModel[] = [];
-  displayedColumns: string[] = ['eventDate', 'name'];
+  displayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
 
   date: Date = new Date();
 
@@ -47,6 +47,17 @@ export class HomeComponent {
           }
         }
       });
+  }
+
+  editItem(item: any): void {
+    // Implement your edit logic here, e.g., open a dialog
+    // where the user can edit the item
+    // Example using MatDialog:
+    // this.dialog.open(EditDialogComponent, { data: item });
+  }
+
+  deleteItem(item: any): void {
+    // Implement your delete logic here
   }
 
 
