@@ -46,21 +46,35 @@ export class DataService {
 
     this.http.post<EventModel>(this.configService.apiUrl + "/Events", event, { headers }).subscribe({
       next: (response) => {
-        console.log('Sucesso');
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sucesso!' });
+        this.messageService.add({ severity: 'success', summary: 'Success' });
         this.loadingFormsEventEmitter.emit(false);
         this.router.navigate(['/home']);
       },
       error: (erro) => {
-        console.log('erro');
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erro!' });
+        this.messageService.add({ severity: 'error', summary: 'Error' });
         this.loadingFormsEventEmitter.emit(false);
       }
     });
   }
 
-  updateEvent(event: EventModel) {
-    console.log("UPDATE");
+  updateEvent(event: EventModel): void {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('Authorization') ?? '',
+      'UserId': localStorage.getItem('UserId') ?? ''
+    });
+
+    this.http.put<EventModel>(this.configService.apiUrl + "/Events", event, { headers }).subscribe({
+      next: (response) => {
+        this.messageService.add({ severity: 'success', summary: 'Success' });
+        this.loadingFormsEventEmitter.emit(false);
+        this.router.navigate(['/home']);
+      },
+      error: (erro) => {
+        this.messageService.add({ severity: 'error', summary: 'Error' });
+        this.loadingFormsEventEmitter.emit(false);
+      }
+    });
   }
 
   deleteEvent(id: string): void {
@@ -72,14 +86,12 @@ export class DataService {
 
     this.http.delete(this.configService.apiUrl + "/Events/" + id, { headers }).subscribe({
       next: (response) => {
-        console.log('Sucesso');
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Sucesso!' });
+        this.messageService.add({ severity: 'success', summary: 'Success' });
         this.loadingFormsEventEmitter.emit(false);
         this.reloadTable.emit(true)
       },
       error: (erro) => {
-        console.log('erro');
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Erro!' });
+        this.messageService.add({ severity: 'error', summary: 'Error' });
         this.loadingFormsEventEmitter.emit(false);
       }
     });

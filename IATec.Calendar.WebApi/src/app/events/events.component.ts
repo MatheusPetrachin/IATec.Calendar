@@ -43,8 +43,6 @@ export class EventsComponent {
       }
     );
 
-    console.log(this.eventModel);
-
     this.form = new FormGroup({
       id: new FormControl(this.eventModel ? this.eventModel.id : null),
       name: new FormControl(this.eventModel ? this.eventModel.name : '', [Validators.required]),
