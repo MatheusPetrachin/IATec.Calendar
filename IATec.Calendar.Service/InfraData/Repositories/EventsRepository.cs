@@ -1,13 +1,11 @@
 using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Commands;
 using IATec.Calendar.Domain.Events.Entities;
 using IATec.Calendar.Domain.Events.Handlers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 
 namespace IATec.Calendar.InfraData.Repositories

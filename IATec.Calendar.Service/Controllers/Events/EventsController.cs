@@ -116,12 +116,11 @@ namespace IATec.Calendar.Controllers.Events
                                                                         .ToListAsync();
 
                 //Lista dos participantes
-                List<Guid> participants = await _context.UserEvents
-                                                        .Where(userEvent => events.Select(x => x.Id).Contains(userEvent.EventId) && userEvent.UserId != userId)
-                                                        .Select(x => x.UserId).ToListAsync();
+                List<Guid> participants = events.SelectMany(x => x.EventUsers.Select(x => x.UserId)).ToList();
+                List<Guid> anfitriões = events.Select(x => x.CreatedBy).ToList();
 
                 //Dados dos participantes e do anfitrião
-                List<UserEntityDomain> users = await _context.Users.Where(x => participants.Contains(x.Id) || events.Select(x => x.CreatedBy).Contains(x.Id)).ToListAsync();
+                List<UserEntityDomain> users = await _context.Users.Where(x => x.Id != userId && (participants.Contains(x.Id) || anfitriões.Contains(x.Id))).ToListAsync();
 
                 foreach (var inviteEvent in events)
                 {
