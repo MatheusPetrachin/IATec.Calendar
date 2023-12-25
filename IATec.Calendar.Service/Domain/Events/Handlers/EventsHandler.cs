@@ -95,7 +95,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
 
                 if (isExclusive)
                 {
-                    var listExclusiveEvents = _context.Events.Where(x => x.Id != request.Id && !x.Deleted && !x.Participants.Any());
+                    var listExclusiveEvents = _context.Events.Where(x => x.Id != request.Id && !x.Deleted && !x.Participants.Any() && x.CreatedBy == request.UserId);
 
                     var isOverlapping = listExclusiveEvents.ToList().Find(record => record.StartDate < request.EndDate && request.StartDate < record.EndDate);
 

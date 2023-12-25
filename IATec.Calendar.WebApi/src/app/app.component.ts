@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './login/AuthService';
 
@@ -8,7 +8,8 @@ import { AuthService } from './login/AuthService';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  userName!: string;
+  @ViewChild(String) userName!: String;
+
   showToolbar: boolean = false;
 
   constructor(private authService: AuthService,
@@ -25,10 +26,9 @@ export class AppComponent {
   ngOnInit() {
     this.authService.showToolbarEmitter.subscribe(
       show => {
+        this.userName = localStorage.getItem('UserName') ?? '';
         this.showToolbar = show
       }
     );
-
-    this.userName = localStorage.getItem('UserName') ?? '';
   }
 }
