@@ -73,7 +73,7 @@ namespace IATec.Calendar.Controllers.Events
             try
             {
                 var events = await _context.Events.Where(x => x.Id == id).FirstOrDefaultAsync();
-                events.Participants = await _context.UserEvents.Where(x => x.EventId == id).ToListAsync();
+                events.EventUsers = await _context.UserEvents.Where(x => x.EventId == id).ToListAsync();
 
                 return Ok(new SelectEvent()
                 {
@@ -87,7 +87,7 @@ namespace IATec.Calendar.Controllers.Events
                     StartMinute = events.StartDate.Minute,
                     EndHour = events.EndDate.Hour,
                     EndMinute = events.EndDate.Minute,
-                    ParticipantIds = events.Participants.Select(x => x.UserId).ToList(),
+                    ParticipantIds = events.EventUsers.Select(x => x.UserId).ToList(),
                 });
             }
             catch (Exception ex)
@@ -111,17 +111,17 @@ namespace IATec.Calendar.Controllers.Events
                 List<SelectInvite> selectInvites = new List<SelectInvite>();
 
                 List<UserEventEntityDomain> userEvents = await _context.UserEvents.Where(x => x.UserId == userId && x.Status == Enums.EStatus.PENDING).ToListAsync();
-                List<EventEntityDomain> events = await _context.Events.Where(x => userEvents.Select(x => x.EventId).Contains(x.Id)).ToListAsync();
+                List<EventEntityDomain> events = await _context.Events.Where(x => !x.Deleted && userEvents.Select(x => x.EventId).Contains(x.Id))
+                                                                        .Include(e => e.EventUsers)
+                                                                        .ToListAsync();
 
-                List<Guid> userIds = new List<Guid>();
+                //Lista dos participantes
+                List<Guid> participants = await _context.UserEvents
+                                                        .Where(userEvent => events.Select(x => x.Id).Contains(userEvent.EventId) && userEvent.UserId != userId)
+                                                        .Select(x => x.UserId).ToListAsync();
 
-                //Id dos participantes
-                userIds.AddRange(userEvents.Select(x => x.UserId).ToList());
-                //Id dos criadores
-                userIds.AddRange(events.Select(x => x.CreatedBy).ToList());
-
-                //Dados de todos
-                List<UserEntityDomain> users = await _context.Users.Where(x => userIds.Contains(x.Id)).ToListAsync();
+                //Dados dos participantes e do anfitrião
+                List<UserEntityDomain> users = await _context.Users.Where(x => participants.Contains(x.Id) || events.Select(x => x.CreatedBy).Contains(x.Id)).ToListAsync();
 
                 foreach (var inviteEvent in events)
                 {
@@ -134,8 +134,7 @@ namespace IATec.Calendar.Controllers.Events
                         StartDate = inviteEvent.StartDate,
                         EndDate = inviteEvent.EndDate,
                         Localization = inviteEvent.Localization,
-                        ParticipantNames = users.Where(x => inviteEvent.Participants.Select(x => x.UserId)
-                                                .Contains(x.Id))
+                        ParticipantNames = users.Where(x => inviteEvent.EventUsers.Select(y => y.UserId).Contains(x.Id))
                                                 .Select(x => x.Name).ToList(),
 
                     });

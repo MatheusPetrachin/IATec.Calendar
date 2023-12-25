@@ -59,7 +59,7 @@ namespace IATec.Calendar.Domain.Events.Entities
             DeletedAt = date;
             Deleted = true;
         }
-        public List<UserEventEntityDomain> Participants { get; set; } = new List<UserEventEntityDomain>();
+        public List<UserEventEntityDomain> EventUsers { get; set; } = new List<UserEventEntityDomain>();
     }
 
     internal class IgnoreColumnAttribute : Attribute

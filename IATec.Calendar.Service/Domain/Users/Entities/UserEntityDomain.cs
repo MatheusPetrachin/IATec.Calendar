@@ -24,6 +24,6 @@ namespace IATec.Calendar.Domain.Users.Entities
         public string Email { get; private set; }
         public string Password { get; private set; }
 
-        public List<UserEventEntityDomain> Events { get; set; }
+        public List<UserEventEntityDomain> UserEvents { get; set; }
     }
 }

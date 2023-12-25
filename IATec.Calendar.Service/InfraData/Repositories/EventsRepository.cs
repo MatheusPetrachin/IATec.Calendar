@@ -29,7 +29,7 @@ namespace IATec.Calendar.InfraData.Repositories
             {
                 _context.Events.Add(entity);
 
-                foreach (var participant in entity.Participants)
+                foreach (var participant in entity.EventUsers)
                     _context.UserEvents.Add(participant);
 
                 await _context.SaveChangesAsync();
@@ -58,16 +58,16 @@ namespace IATec.Calendar.InfraData.Repositories
             try
             {
                 var record = await _context.Events.FindAsync(eventEntityDomain.Id);
-                record.Participants = await _context.UserEvents.Where(x => x.EventId == eventEntityDomain.Id).ToListAsync();
+                record.EventUsers = await _context.UserEvents.Where(x => x.EventId == eventEntityDomain.Id).ToListAsync();
 
                 if (record != null)
                 {
                     _context.Entry(record).CurrentValues.SetValues(eventEntityDomain);
 
                     // Remover quem não vai mais participar
-                    record.Participants = record.Participants.Where(id => eventEntityDomain.Participants.Contains(id)).ToList();
+                    record.EventUsers = record.EventUsers.Where(id => eventEntityDomain.EventUsers.Contains(id)).ToList();
                     // Adicionar quem vai participar
-                    record.Participants.AddRange(eventEntityDomain.Participants.Where(id => !record.Participants.Contains(id)));
+                    record.EventUsers.AddRange(eventEntityDomain.EventUsers.Where(id => !record.EventUsers.Contains(id)));
 
                     await _context.SaveChangesAsync();
                 }

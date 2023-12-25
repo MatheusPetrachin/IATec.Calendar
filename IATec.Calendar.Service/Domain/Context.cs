@@ -23,14 +23,14 @@ namespace IATec.Calendar.Domain
                 .HasKey(ue => new { ue.UserId, ue.EventId });
 
             modelBuilder.Entity<UserEventEntityDomain>()
-                .HasOne(ue => ue.User)
-                .WithMany(u => u.Events)
-                .HasForeignKey(ue => ue.UserId);
+                        .HasOne(ue => ue.User)
+                        .WithMany(u => u.UserEvents)
+                        .HasForeignKey(ue => ue.UserId);
 
             modelBuilder.Entity<UserEventEntityDomain>()
-                .HasOne(ue => ue.Event)
-                .WithMany(e => e.Participants)
-                .HasForeignKey(ue => ue.EventId);
+                        .HasOne(ue => ue.Event)
+                        .WithMany(e => e.EventUsers)
+                        .HasForeignKey(ue => ue.EventId);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
                 var entity = request.ToEntity();
 
                 foreach (var participantId in request.ParticipantIds)
-                    entity.Participants.Add(new UserEventEntityDomain(participantId, entity.Id));
+                    entity.EventUsers.Add(new UserEventEntityDomain(participantId, entity.Id));
 
                 await _eventsRepository.CreateAsync(entity);
 
@@ -74,7 +74,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
                 var entity = request.ToEntity(record);
 
                 foreach (var participantId in request.ParticipantIds)
-                    entity.Participants.Add(new UserEventEntityDomain(participantId, entity.Id));
+                    entity.EventUsers.Add(new UserEventEntityDomain(participantId, entity.Id));
 
                 await _eventsRepository.UpdateAsync(entity);
 
@@ -94,7 +94,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
 
                 if (isExclusive)
                 {
-                    var listExclusiveEvents = _context.Events.Where(x => x.Id != request.Id && !x.Deleted && !x.Participants.Any() && x.CreatedBy == request.UserId);
+                    var listExclusiveEvents = _context.Events.Where(x => x.Id != request.Id && !x.Deleted && !x.EventUsers.Any() && x.CreatedBy == request.UserId);
 
                     var isOverlapping = listExclusiveEvents.ToList().Find(record => record.StartDate <= request.EndDate && request.StartDate <= record.EndDate);
 
