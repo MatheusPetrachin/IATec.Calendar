@@ -2,14 +2,13 @@
     <mat-toolbar-row class="toolbar-row">
 
 
-        <button mat-button (click)="redirect('home')">
-            Home
+        <button mat-raised-button (click)="redirect('home')">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>Home
         </button>
 
         <span class="spacer"></span>
 
-        <i class="material-icons">people</i>
-        <span>{{ userName }}</span>
+        Bem Vindo, {{ userName }}
         <button mat-button (click)="logout()">
             <i class="material-icons">logout</i>
         </button>
