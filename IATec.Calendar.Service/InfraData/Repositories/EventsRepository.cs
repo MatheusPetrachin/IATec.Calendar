@@ -64,11 +64,8 @@ namespace IATec.Calendar.InfraData.Repositories
                 {
                     _context.Entry(record).CurrentValues.SetValues(eventEntityDomain);
 
-                    //remover quem não vai mais participar, adicionar quem vai participar e ignorar quem já esta participando
-
                     // Remover quem não vai mais participar
                     record.Participants = record.Participants.Where(id => eventEntityDomain.Participants.Contains(id)).ToList();
-
                     // Adicionar quem vai participar
                     record.Participants.AddRange(eventEntityDomain.Participants.Where(id => !record.Participants.Contains(id)));
 
