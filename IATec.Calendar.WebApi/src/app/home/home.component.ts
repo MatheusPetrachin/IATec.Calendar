@@ -7,7 +7,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ToastService } from '../toast.service';
 import { ProgressBarService } from '../progressbar.service';
 import { InviteModel } from '../models/invitemodel';
-import { DatePipe } from '@angular/common';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +28,7 @@ export class HomeComponent {
     private authService: AuthService,
     private progressBarService: ProgressBarService,
     private toastService: ToastService,
-    private datePipe: DatePipe) {
+    public dialog: MatDialog) {
     this.obterDataAtual()
   }
 
@@ -114,6 +121,14 @@ export class HomeComponent {
     }
     else {
 
+    }
+  }
+
+  inviteAction(eventId: string, acept: boolean) {
+    if (acept) {
+      this.dataService.aceptInvite();
+    } else {
+      this.dataService.rejectInvite();
     }
   }
 }

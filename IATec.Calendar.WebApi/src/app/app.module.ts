@@ -36,7 +36,6 @@ import { UpdateEventsComponent } from './events/update/update.events.component';
 import { ToastService } from './toast.service';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ProgressBarService } from './progressbar.service';
-import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -90,8 +89,7 @@ import { DatePipe } from '@angular/common';
       } as MatSnackBarConfig,
     },
     ToastService,
-    ProgressBarService,
-    DatePipe
+    ProgressBarService
   ],
   bootstrap: [AppComponent]
 })

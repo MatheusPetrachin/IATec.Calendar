@@ -124,10 +124,10 @@
                         <th mat-header-cell *matHeaderCellDef> Aceitar </th>
                         <td mat-cell *matCellDef="let element">
                             <button mat-icon-button>
-                                <mat-icon>check</mat-icon>
+                                <mat-icon (click)="inviteAction(element.inviteId, true)">check</mat-icon>
                             </button>
                             <button mat-icon-button>
-                                <mat-icon>clear</mat-icon>
+                                <mat-icon (click)="inviteAction(element.inviteId, false)">clear</mat-icon>
                             </button>
                         </td>
                     </ng-container>

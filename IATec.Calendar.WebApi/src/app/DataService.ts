@@ -15,6 +15,12 @@ import { InviteModel } from './models/invitemodel';
   providedIn: 'root'
 })
 export class DataService {
+  rejectInvite() {
+    throw new Error('Method not implemented.');
+  }
+  aceptInvite() {
+    throw new Error('Method not implemented.');
+  }
 
   reloadTable = new EventEmitter<boolean>();
 
