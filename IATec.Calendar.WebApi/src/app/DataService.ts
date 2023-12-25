@@ -9,11 +9,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastService } from './toast.service';
 import { AuthService } from './login/AuthService';
 import { ProgressBarService } from './progressbar.service';
+import { InviteModel } from './models/invitemodel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
   reloadTable = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient,
@@ -38,6 +40,15 @@ export class DataService {
       'Authorization': localStorage.getItem('Authorization') ?? ''
     });
     return this.http.get<EventModel>(this.configService.apiUrl + "/Events/" + id, { headers });
+  }
+
+  getListInvitesData(userId: string): Observable<InviteModel[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('Authorization') ?? '',
+      'userid': userId
+    });
+    return this.http.get<InviteModel[]>(this.configService.apiUrl + "/Events/Invites", { headers });
   }
 
   createEvent(event: EventModel): void {

@@ -6,6 +6,8 @@ import { AuthService } from '../login/AuthService';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastService } from '../toast.service';
 import { ProgressBarService } from '../progressbar.service';
+import { InviteModel } from '../models/invitemodel';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,8 @@ export class HomeComponent {
     private dataService: DataService,
     private authService: AuthService,
     private progressBarService: ProgressBarService,
-    private toastService: ToastService) {
+    private toastService: ToastService,
+    private datePipe: DatePipe) {
     this.obterDataAtual()
   }
 
@@ -26,8 +29,8 @@ export class HomeComponent {
   eventsDisplayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
   eventsResultsLength = 0;
 
-  invitationsDataSource: MatTableDataSource<EventModel> = new MatTableDataSource();
-  invitationsDisplayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
+  invitationsDataSource: MatTableDataSource<InviteModel> = new MatTableDataSource();
+  invitationsDisplayedColumns: string[] = ['hostName', 'eventName', 'startDate', 'endDate', 'localization', 'participantNames', 'actions'];
   invitationsResultsLength = 0;
 
   date: Date = new Date();
@@ -69,6 +72,23 @@ export class HomeComponent {
 
           if (error.status === 404) {
             this.toastService.warning("Não há eventos para hoje!");
+          } else {
+            this.toastService.error("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+          }
+        }
+      });
+
+    this.dataService.getListInvitesData(localStorage.getItem('UserId') ?? '')
+      .subscribe({
+        next: (response) => {
+          this.invitationsDataSource.data = response;
+          this.invitationsResultsLength = response.length;
+        },
+        error: (error) => {
+          console.log(error.message);
+
+          if (error.status === 404) {
+            this.toastService.warning("Não há convites para hoje!");
           } else {
             this.toastService.error("Ocorreu um erro inesperado. Tente novamente mais tarde.");
           }

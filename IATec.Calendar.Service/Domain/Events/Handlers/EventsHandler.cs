@@ -37,14 +37,8 @@ namespace IATec.Calendar.Domain.Users.Handlers
 
                 var entity = request.ToEntity();
 
-                request.ParticipantIds?.ForEach(userId =>
-                {
-                    entity.Participants.Add(new UserEventEntityDomain()
-                    {
-                        EventId = entity.Id,
-                        UserId = userId
-                    });
-                });
+                foreach (var participantId in request.ParticipantIds)
+                    entity.Participants.Add(new UserEventEntityDomain(participantId, entity.Id));
 
                 await _eventsRepository.CreateAsync(entity);
 
@@ -78,15 +72,9 @@ namespace IATec.Calendar.Domain.Users.Handlers
 
                 var record = _context.Events.Find(request.Id);
                 var entity = request.ToEntity(record);
-                request.ParticipantIds?.ForEach(userId =>
-                {
-                    entity.Participants.Add(new UserEventEntityDomain()
-                    {
-                        EventId = entity.Id,
-                        UserId = userId
-                    });
-                });
 
+                foreach (var participantId in request.ParticipantIds)
+                    entity.Participants.Add(new UserEventEntityDomain(participantId, entity.Id));
 
                 await _eventsRepository.UpdateAsync(entity);
 
