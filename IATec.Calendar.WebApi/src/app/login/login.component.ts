@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from './AuthService';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
-import { DataService } from '../DataService';
+import { DataService } from '../dataservice';
 import { ToastService } from '../toast.service';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ProgressBarService } from '../progressbar.service';

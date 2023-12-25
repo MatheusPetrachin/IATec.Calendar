@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '../DataService';
+import { DataService } from '../dataservice';
 import { UserModel } from '../models/usermodel';
 import { EventModel } from '../models/eventmodel';
 import { ProgressBarService } from '../progressbar.service';

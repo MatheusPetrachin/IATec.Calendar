@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EventModel } from '../../models/eventmodel';
-import { DataService } from '../../DataService';
+import { DataService } from '../../dataservice';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '../../toast.service';
 

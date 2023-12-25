@@ -16,7 +16,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AuthGuardService } from './AuthGuardService';
+import { AuthGuardService } from './authguardservice';
 import { EventsComponent } from './events/events.component';
 import { ApiConfigServiceService } from './ApiConfigServiceService';
 import { MatDatepickerModule } from '@angular/material/datepicker';

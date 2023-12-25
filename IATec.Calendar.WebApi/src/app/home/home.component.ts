@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventModel } from '../models/eventmodel';
-import { DataService } from '../DataService';
+import { DataService } from '../dataservice';
 import { AuthService } from '../login/AuthService';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastService } from '../toast.service';
