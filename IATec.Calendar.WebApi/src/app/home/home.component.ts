@@ -22,9 +22,13 @@ export class HomeComponent {
     this.obterDataAtual()
   }
 
-  dataSource: MatTableDataSource<EventModel> = new MatTableDataSource();
-  displayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
-  resultsLength = 0;
+  eventsDataSource: MatTableDataSource<EventModel> = new MatTableDataSource();
+  eventsDisplayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
+  eventsResultsLength = 0;
+
+  invitationsDataSource: MatTableDataSource<EventModel> = new MatTableDataSource();
+  invitationsDisplayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
+  invitationsResultsLength = 0;
 
   date: Date = new Date();
 
@@ -57,8 +61,8 @@ export class HomeComponent {
     this.dataService.getListEventData(localStorage.getItem('UserId') ?? '', date)
       .subscribe({
         next: (response) => {
-          this.dataSource.data = response;
-          this.resultsLength = response.length;
+          this.eventsDataSource.data = response;
+          this.eventsResultsLength = response.length;
         },
         error: (error) => {
           console.log(error.message);
@@ -79,12 +83,17 @@ export class HomeComponent {
     }
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(event: Event, eventsTable: boolean) {
+    if (eventsTable) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.eventsDataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+      if (this.eventsDataSource.paginator) {
+        this.eventsDataSource.paginator.firstPage();
+      }
+    }
+    else {
+
     }
   }
 }
