@@ -15,8 +15,7 @@ export class LoginComponent {
   form: FormGroup;
 
   constructor(private authService: AuthService,
-    private _formBuilder: FormBuilder,
-    private router: Router) {
+    private _formBuilder: FormBuilder) {
     this.form = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -32,10 +31,10 @@ export class LoginComponent {
   }
 
   submit() {
-    this.authService.showLoginLoader.emit(true);
     var user = this.form.value as UserModel;
 
     if (this.form.valid) {
+      this.authService.showLoginLoader.emit(true);
       this.authService.login(user);
     }
   }

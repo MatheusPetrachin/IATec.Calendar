@@ -15,7 +15,7 @@ interface selectModel {
   styleUrl: './events.component.scss'
 })
 export class EventsComponent {
-  @Input() action: boolean = false;
+  @Input() create: boolean = false;
   @Input() eventModel: EventModel | null = null;
 
   form!: FormGroup;

@@ -4,8 +4,9 @@ import { Observable, catchError } from 'rxjs';
 import { ApiConfigServiceService } from './ApiConfigServiceService';
 import { EventModel } from './models/eventmodel';
 import { UserModel } from './models/usermodel';
-import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class DataService {
 
   constructor(private http: HttpClient,
     private configService: ApiConfigServiceService,
-    private messageService: MessageService,
+    private _toastService: ToastService,
     private router: Router) { }
 
   getListEventData(userId: string, date: Date): Observable<EventModel[]> {
@@ -46,12 +47,12 @@ export class DataService {
 
     this.http.post<EventModel>(this.configService.apiUrl + "/Events", event, { headers }).subscribe({
       next: (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Success' });
+        // this._snackBar.open('');
         this.loadingFormsEventEmitter.emit(false);
         this.router.navigate(['/home']);
       },
       error: (erro) => {
-        this.messageService.add({ severity: 'error', summary: 'Error' });
+        // this._snackBar.open('');
         this.loadingFormsEventEmitter.emit(false);
       }
     });
@@ -66,12 +67,12 @@ export class DataService {
 
     this.http.put<EventModel>(this.configService.apiUrl + "/Events", event, { headers }).subscribe({
       next: (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Success' });
+        // this._snackBar.open('');
         this.loadingFormsEventEmitter.emit(false);
         this.router.navigate(['/home']);
       },
       error: (erro) => {
-        this.messageService.add({ severity: 'error', summary: 'Error' });
+        // this._snackBar.open('');
         this.loadingFormsEventEmitter.emit(false);
       }
     });
@@ -86,12 +87,12 @@ export class DataService {
 
     this.http.delete(this.configService.apiUrl + "/Events/" + id, { headers }).subscribe({
       next: (response) => {
-        this.messageService.add({ severity: 'success', summary: 'Success' });
+        this._toastService.success('Removido com sucesso!');
         this.loadingFormsEventEmitter.emit(false);
         this.reloadTable.emit(true)
       },
       error: (erro) => {
-        this.messageService.add({ severity: 'error', summary: 'Error' });
+        this._toastService.success('Erro ao remover!');
         this.loadingFormsEventEmitter.emit(false);
       }
     });

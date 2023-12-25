@@ -31,10 +31,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { CreateEventsComponent } from './events/create/create.events.component';
 import { UpdateEventsComponent } from './events/update/update.events.component';
+import { ToastService } from './toast.service';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -71,17 +71,25 @@ import { UpdateEventsComponent } from './events/update/update.events.component';
     MatSelectModule,
     MatOptionModule,
     MatTabsModule,
-    MatProgressBarModule,
-    ToastModule
+    MatProgressBarModule
   ],
   providers: [
     AuthService,
     AuthGuardService,
     ApiConfigServiceService,
     HttpClient,
-    MessageService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        duration: 2000
+      } as MatSnackBarConfig,
+    },
+    ToastService
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

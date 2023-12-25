@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
 import { ApiConfigServiceService } from '../ApiConfigServiceService';
+import { ToastService } from '../toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { ApiConfigServiceService } from '../ApiConfigServiceService';
 export class AuthService {
   constructor(private http: HttpClient,
     private configService: ApiConfigServiceService,
-    private router: Router) { }
+    private router: Router,
+    private _toastService: ToastService) { }
 
   showToolbarEmitter = new EventEmitter<boolean>();
   showLoginLoader = new EventEmitter<boolean>();
@@ -38,9 +40,9 @@ export class AuthService {
         console.log(erro.message);
 
         if (erro.status === 404) {
-          alert("Usuário ou Senha inválido(s)!");
+          this._toastService.error("Usuário ou Senha inválido(s)!");
         } else {
-          alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+          this._toastService.error("Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
 
         this.showLoginLoader.emit(false);

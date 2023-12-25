@@ -1,9 +1,10 @@
-import { Component, EventEmitter, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventModel } from '../models/eventmodel';
 import { DataService } from '../DataService';
 import { AuthService } from '../login/AuthService';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastService } from '../toast.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,10 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class HomeComponent {
 
-  constructor(private router: Router, private dataService: DataService, private authService: AuthService, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router,
+    private dataService: DataService,
+    private authService: AuthService,
+    private _toastService: ToastService) {
     this.obterDataAtual()
   }
 
