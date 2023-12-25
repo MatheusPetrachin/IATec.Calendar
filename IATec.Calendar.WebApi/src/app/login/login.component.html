@@ -47,7 +47,7 @@
 
                 <mat-form-field class="col-12">
                     <mat-label for="confirmPassword">Confirmar Senha:</mat-label>
-                    <input matInput type="password" id="confirmPassword" formControlName="confirm Password" required>
+                    <input matInput type="password" id="confirmPassword" formControlName="confirmPassword" required>
                     <mat-error *ngIf="cadForm.get('password')?.hasError('required')">Confirmação de Senha
                         obrigatória</mat-error>
                 </mat-form-field>
