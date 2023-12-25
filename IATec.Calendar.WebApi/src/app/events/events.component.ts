@@ -47,13 +47,13 @@ export class EventsComponent {
       id: new FormControl(this.eventModel ? this.eventModel.id : null),
       name: new FormControl(this.eventModel ? this.eventModel.name : '', [Validators.required]),
       description: new FormControl(this.eventModel ? this.eventModel.description : '', Validators.required),
-      startDate: new FormControl(this.eventModel ? this.eventModel.startDate : '', Validators.required),
-      endDate: new FormControl(this.eventModel ? this.eventModel.endDate : '', Validators.required),
+      startDate: new FormControl(this.eventModel ? this.eventModel.startDate : new Date(), Validators.required),
+      endDate: new FormControl(this.eventModel ? this.eventModel.endDate : new Date(), Validators.required),
       localization: new FormControl(this.eventModel ? this.eventModel.localization : '', Validators.required),
-      startHour: new FormControl(this.eventModel ? this.eventModel.startHour : '', Validators.required),
-      startMinute: new FormControl(this.eventModel ? this.eventModel.startMinute : '', Validators.required),
-      endHour: new FormControl(this.eventModel ? this.eventModel.endHour : '', Validators.required),
-      endMinute: new FormControl(this.eventModel ? this.eventModel.endMinute : '', Validators.required),
+      startHour: new FormControl(this.eventModel ? this.eventModel.startHour : 0, Validators.required),
+      startMinute: new FormControl(this.eventModel ? this.eventModel.startMinute : 0, Validators.required),
+      endHour: new FormControl(this.eventModel ? this.eventModel.endHour : 0, Validators.required),
+      endMinute: new FormControl(this.eventModel ? this.eventModel.endMinute : 0, Validators.required),
       participantIds: new FormControl(this.eventModel ? this.eventModel.participantIds : '', Validators.required)
     });
 
@@ -102,6 +102,35 @@ export class EventsComponent {
 
   submit(isEdit: boolean) {
     var event = this.form.value as EventModel;
+
+    this.form.get('endDate')?.setErrors(null);
+    this.form.get('endHour')?.setErrors(null);
+    this.form.get('endMinute')?.setErrors(null);
+
+    const endDate = new Date(event.endDate.getFullYear(), event.endDate.getMonth(), event.endDate.getDate(), 0, 0, 0, 0);
+    const startDate = new Date(event.startDate.getFullYear(), event.startDate.getMonth(), event.startDate.getDate(), 0, 0, 0, 0);
+
+    if (endDate.getTime() === startDate.getTime()) {
+      if (event.endHour === event.startHour) {
+        if (event.endMinute <= event.startMinute) {
+          console.log('invalid minute');
+          this.form.get('endDate')?.setErrors({ 'InvalidEventEndDateTime': true });
+          this.form.get('endHour')?.setErrors({ 'InvalidEventEndDateTime': true });
+          this.form.get('endMinute')?.setErrors({ 'InvalidEventEndDateTime': true });
+        }
+      } else if (event.endHour < event.startHour) {
+        console.log('invalid hour');
+        this.form.get('endDate')?.setErrors({ 'InvalidEventEndDateTime': true });
+        this.form.get('endHour')?.setErrors({ 'InvalidEventEndDateTime': true });
+        this.form.get('endMinute')?.setErrors({ 'InvalidEventEndDateTime': true });
+      }
+    } else if (endDate < startDate) {
+      console.log('invalid date');
+      this.form.get('endDate')?.setErrors({ 'InvalidEventEndDateTime': true });
+      this.form.get('endHour')?.setErrors({ 'InvalidEventEndDateTime': true });
+      this.form.get('endMinute')?.setErrors({ 'InvalidEventEndDateTime': true });
+
+    }
 
     if (this.form.valid) {
       this.dataService.loadingFormsEventEmitter.emit(true);

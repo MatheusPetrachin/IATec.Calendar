@@ -50,11 +50,13 @@
         </mat-form-field>
 
         <div class="col-12">
-            <span>Fim</span>
+            <span>Fim </span>
         </div>
         <mat-form-field class="col-8">
             <mat-label>Data do evento</mat-label>
             <input matInput [matDatepicker]="endDatepicker" formControlName="endDate">
+            <mat-error *ngIf="form.get('endDate')?.hasError('InvalidEventEndDateTime')">Data/Hora para o fim do
+                evento inválida!</mat-error>
             <mat-datepicker-toggle matIconSuffix [for]="endDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #endDatepicker>
                 <mat-datepicker-actions>
@@ -79,7 +81,6 @@
                 }
             </mat-select>
         </mat-form-field>
-
 
         <mat-form-field class="col-12">
             <mat-label>Endereço do Evento</mat-label>
