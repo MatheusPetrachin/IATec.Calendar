@@ -36,10 +36,10 @@ export class AuthService {
         this.router.navigate(['/home']);
         this.showLoginLoader.emit(false);
       },
-      error: (erro) => {
-        console.log(erro.message);
+      error: (error) => {
+        console.log(error.message);
 
-        if (erro.status === 404) {
+        if (error.status === 404) {
           this._toastService.error("Usuário ou Senha inválido(s)!");
         } else {
           this._toastService.error("Ocorreu um erro inesperado. Tente novamente mais tarde.");

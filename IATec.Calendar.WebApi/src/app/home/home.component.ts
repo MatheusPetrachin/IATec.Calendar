@@ -58,10 +58,10 @@ export class HomeComponent {
           this.dataSource.data = response;
           this.resultsLength = response.length;
         },
-        error: (erro) => {
-          console.log(erro.message);
+        error: (error) => {
+          console.log(error.message);
 
-          if (erro.status === 404) {
+          if (error.status === 404) {
             alert("Não há eventos para hoje!");
           } else {
             alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");

@@ -27,10 +27,10 @@ export class UpdateEventsComponent {
           console.log(response);
           this.eventModel = response;
         },
-        error: (erro) => {
-          console.log(erro.message);
+        error: (error) => {
+          console.log(error.message);
 
-          if (erro.status === 404) {
+          if (error.status === 404) {
             alert("Nada foi encontrado!");
           } else {
             alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");

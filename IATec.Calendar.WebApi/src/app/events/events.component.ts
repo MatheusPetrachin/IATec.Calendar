@@ -54,7 +54,7 @@ export class EventsComponent {
       startMinute: new FormControl(this.eventModel ? this.eventModel.startMinute : 0, Validators.required),
       endHour: new FormControl(this.eventModel ? this.eventModel.endHour : 0, Validators.required),
       endMinute: new FormControl(this.eventModel ? this.eventModel.endMinute : 0, Validators.required),
-      participantIds: new FormControl(this.eventModel ? this.eventModel.participantIds : '', Validators.required)
+      participantIds: new FormControl(this.eventModel ? this.eventModel.participantIds : [])
     });
 
   }
@@ -86,8 +86,8 @@ export class EventsComponent {
       next: (response) => {
         this.toppingList = response;
       },
-      error: (erro) => {
-        console.log(erro.message);
+      error: (error) => {
+        console.log(error.message);
       }
     });
   }

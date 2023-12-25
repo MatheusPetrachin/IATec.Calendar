@@ -51,8 +51,8 @@ namespace IATec.Calendar.Controllers.Events
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                _logger.LogError(ex, $"Error on GET {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -87,8 +87,8 @@ namespace IATec.Calendar.Controllers.Events
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                _logger.LogError(ex, $"Error on GET {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -111,7 +111,7 @@ namespace IATec.Calendar.Controllers.Events
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -135,8 +135,8 @@ namespace IATec.Calendar.Controllers.Events
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                _logger.LogError(ex, $"Error on PUT {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -159,8 +159,8 @@ namespace IATec.Calendar.Controllers.Events
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                _logger.LogError(ex, $"Error on DELETE {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

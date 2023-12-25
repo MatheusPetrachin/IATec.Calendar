@@ -84,7 +84,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/mater
       useValue: {
         verticalPosition: 'top',
         horizontalPosition: 'right',
-        duration: 2000
+        duration: 4000
       } as MatSnackBarConfig,
     },
     ToastService

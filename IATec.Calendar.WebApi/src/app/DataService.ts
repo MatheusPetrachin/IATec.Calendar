@@ -53,8 +53,9 @@ export class DataService {
         this.loadingFormsEventEmitter.emit(false);
         this.router.navigate(['/home']);
       },
-      error: (erro) => {
-        this._toastService.success('Erro ao criar!');
+      error: (error) => {
+        console.log(error)
+        this._toastService.error(error.error);
         this.loadingFormsEventEmitter.emit(false);
       }
     });
@@ -69,12 +70,13 @@ export class DataService {
 
     this.http.put<EventModel>(this.configService.apiUrl + "/Events/" + event.id, event, { headers }).subscribe({
       next: (response) => {
-        // this._snackBar.open('');
+        this._toastService.success('Atualizado com sucesso!');
         this.loadingFormsEventEmitter.emit(false);
         this.router.navigate(['/home']);
       },
-      error: (erro) => {
-        // this._snackBar.open('');
+      error: (error) => {
+        console.log(error);
+        this._toastService.error(error.error);
         this.loadingFormsEventEmitter.emit(false);
       }
     });
@@ -93,7 +95,7 @@ export class DataService {
         this.loadingFormsEventEmitter.emit(false);
         this.reloadTable.emit(true)
       },
-      error: (erro) => {
+      error: (error) => {
         this._toastService.success('Erro ao remover!');
         this.loadingFormsEventEmitter.emit(false);
       }

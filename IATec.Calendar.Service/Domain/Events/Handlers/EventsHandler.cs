@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain.Events.Commands;
+using IATec.Calendar.Domain.Events.Commands.Base;
 using IATec.Calendar.Domain.Events.Entities;
 using IATec.Calendar.Domain.Events.Handlers;
 using IATec.Calendar.Domain.UserEvents.Entities;
@@ -32,6 +33,8 @@ namespace IATec.Calendar.Domain.Users.Handlers
         {
             try
             {
+                validator(request);
+
                 var entity = request.ToEntity();
 
                 request.ParticipantIds?.ForEach(userId =>
@@ -49,8 +52,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
-                return Unit.Value;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -64,8 +66,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
-                return Unit.Value;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -82,12 +83,11 @@ namespace IATec.Calendar.Domain.Users.Handlers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
-                return Unit.Value;
+                throw new Exception(ex.Message);
             }
         }
 
-        private void validator(UpdateEventsCommand request)
+        private void validator<T>(T request) where T : BaseEventsCommand
         {
             try
             {
@@ -95,10 +95,12 @@ namespace IATec.Calendar.Domain.Users.Handlers
 
                 if (isExclusive)
                 {
-                    var isOverlapping = _context.Events.Any(record => (record.StartDate <= request.StartDate || request.EndDate <= record.StartDate) && record.Id != request.Id);
+                    var listExclusiveEvents = _context.Events.Where(x => x.Id != request.Id && !x.Deleted && !x.Participants.Any());
 
-                    if (isOverlapping)
-                        throw new Exception("Já existe um evento que inicia/termina nesta Data/Hora!");
+                    var isOverlapping = listExclusiveEvents.ToList().Find(record => record.StartDate < request.EndDate && request.StartDate < record.EndDate);
+
+                    if (isOverlapping != null)
+                        throw new Exception("Eventos exclusivos não podem sobrepor outros eventos exclusivos, Já existe um evento que inicia/termina nesta Data/Hora!");
                 }
             }
             catch (Exception ex)

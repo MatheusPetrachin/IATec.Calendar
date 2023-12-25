@@ -71,7 +71,7 @@ namespace IATec.Calendar.Controllers.Users
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }
