@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './AuthService';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
@@ -12,15 +12,10 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   loading: boolean = false;
-  form: FormGroup;
+  loginForm!: FormGroup;
+  cadForm!: FormGroup;
 
-  constructor(private authService: AuthService,
-    private _formBuilder: FormBuilder) {
-    this.form = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    })
-  }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.showLoginLoader.subscribe(
@@ -28,15 +23,34 @@ export class LoginComponent {
         this.loading = show
       }
     );
+
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
+
+    this.cadForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required])
+    });
   }
 
-  submit() {
-    var user = this.form.value as UserModel;
+  submitLogin() {
+    var user = this.loginForm.value as UserModel;
 
-    if (this.form.valid) {
+    if (this.loginForm.valid) {
       this.authService.showLoginLoader.emit(true);
       this.authService.login(user);
     }
+  }
+
+  submitCad() {
+    var user = this.cadForm.value as UserModel;
+
+    if (this.cadForm.valid)
+      console.log(user);
   }
 
   @Input() error!: string | null;

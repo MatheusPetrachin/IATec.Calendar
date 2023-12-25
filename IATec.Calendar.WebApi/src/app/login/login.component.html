@@ -1,25 +1,60 @@
 <div class="login-container col-12 col-sm-8 col-md-6 col-lg-4">
-    <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
-        <div class="text-center mb-3"> <!-- Adicionado text-center para centralizar e mb-3 para margem inferior -->
-            <img src="assets\calendar.jpg" alt="Imagem 1">
-        </div>
+    <div class="text-center mb-3">
+        <img src="assets\calendar.jpg" alt="Imagem 1">
+    </div>
 
-        <mat-form-field class="col-12">
-            <mat-label>Usuário:</mat-label>
-            <input matInput type="text" id="username" formControlName="email" required>
-            <mat-error *ngIf="form.get('email')?.hasError('required')">Nome obrigatório</mat-error>
-        </mat-form-field>
+    <mat-tab-group class="login-form">
+        <mat-tab label="Login">
+            <form class="login-form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+                <div class="mb-3"></div>
+                <mat-form-field class="col-12">
+                    <mat-label>Usuário:</mat-label>
+                    <input matInput type="text" id="username" formControlName="email" required>
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Nome obrigatório</mat-error>
+                </mat-form-field>
 
-        <mat-form-field class="col-12">
-            <mat-label>Senha:</mat-label>
-            <input matInput type="password" id="password" formControlName="password" required>
-            <mat-error *ngIf="form.get('password')?.hasError('required')">Senha obrigatória</mat-error>
-        </mat-form-field>
+                <mat-form-field class="col-12">
+                    <mat-label>Senha:</mat-label>
+                    <input matInput type="password" id="password" formControlName="password" required>
+                    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Senha obrigatória</mat-error>
+                </mat-form-field>
 
-        <div class="mb-3"></div>
+                <div class="mb-3"><button type="submit" mat-button class="col-6">Entrar</button></div>
+            </form>
 
-        <button type="submit" mat-button>Entrar</button>
-    </form>
+        </mat-tab>
+        <mat-tab label="Cadastre-se">
+            <form class="login-form" [formGroup]="cadForm" (ngSubmit)="submitCad()">
+                <div class="mb-3"></div>
+
+                <mat-form-field class="col-12">
+                    <mat-label for="username">Nome Completo:</mat-label>
+                    <input matInput type="text" id="username" formControlName="name" required>
+                    <mat-error *ngIf="cadForm.get('name')?.hasError('required')">Nome obrigatório</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <mat-label for="useremail">Email:</mat-label>
+                    <input matInput type="text" id="useremail" formControlName="email" required>
+                    <mat-error *ngIf="cadForm.get('email')?.hasError('required')">Nome obrigatório</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <mat-label for="password">Senha:</mat-label>
+                    <input matInput type="password" id="password" formControlName="password" required>
+                    <mat-error *ngIf="cadForm.get('password')?.hasError('required')">Senha obrigatória</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <mat-label for="confirmPassword">Confirmar Senha:</mat-label>
+                    <input matInput type="password" id="confirmPassword" formControlName="confirm Password" required>
+                    <mat-error *ngIf="cadForm.get('password')?.hasError('required')">Confirmação de Senha
+                        obrigatória</mat-error>
+                </mat-form-field>
+                <div class="mb-3"><button type="submit" mat-button class="col-6">Entrar</button></div>
+            </form>
+
+        </mat-tab>
+    </mat-tab-group>
     <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-
 </div>
