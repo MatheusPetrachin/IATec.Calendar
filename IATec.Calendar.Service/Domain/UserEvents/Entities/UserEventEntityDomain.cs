@@ -9,11 +9,13 @@ namespace IATec.Calendar.Domain.UserEvents.Entities
     [Table("userevent", Schema = "calendar")]
     public class UserEventEntityDomain
     {
-        public UserEventEntityDomain(Guid userId, Guid eventId)
+        public UserEventEntityDomain(Guid userId,
+                                     Guid eventId,
+                                     EStatus status = EStatus.PENDING)
         {
             UserId = userId;
             EventId = eventId;
-            Status = EStatus.PENDING;
+            Status = status;
         }
 
         public Guid UserId { get; set; }

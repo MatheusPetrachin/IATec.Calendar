@@ -15,12 +15,6 @@ import { InviteModel } from './models/invitemodel';
   providedIn: 'root'
 })
 export class DataService {
-  rejectInvite() {
-    throw new Error('Method not implemented.');
-  }
-  aceptInvite() {
-    throw new Error('Method not implemented.');
-  }
 
   reloadTable = new EventEmitter<boolean>();
 
@@ -113,7 +107,7 @@ export class DataService {
         this.reloadTable.emit(true)
       },
       error: (error) => {
-        this.toastService.success('Erro ao remover!');
+        this.toastService.error('Erro ao remover!');
         this.progressBarService.showLoad(false);
       }
     });
@@ -135,5 +129,24 @@ export class DataService {
     });
 
     return this.http.get<UserModel[]>(this.configService.apiUrl + "/Users/All", { headers });
+  }
+
+  aceptRejectInvite(eventId: string, acept: boolean) {
+    var userId = localStorage.getItem('UserId') ?? '';
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('Authorization') ?? '',
+      'UserId': userId
+    });
+
+    var body = {
+      EventId: eventId,
+      UserId: userId,
+      Status: acept ? 2 : 3
+    };
+
+    return this.http.post<null>(`${this.configService.apiUrl}/Events/Invite`, body, { headers: headers }
+    );
   }
 }

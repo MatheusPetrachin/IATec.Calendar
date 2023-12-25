@@ -7,6 +7,7 @@ using IATec.Calendar.Domain.Events.Commands.Base;
 using IATec.Calendar.Domain.Events.Entities;
 using IATec.Calendar.Domain.Events.Handlers;
 using IATec.Calendar.Domain.UserEvents.Entities;
+using IATec.Calendar.Enums;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -14,7 +15,8 @@ namespace IATec.Calendar.Domain.Users.Handlers
 {
     public class EventsHandler : IRequestHandler<CreateEventsCommand>,
                                  IRequestHandler<DeleteEventsCommand>,
-                                 IRequestHandler<UpdateEventsCommand>
+                                 IRequestHandler<UpdateEventsCommand>,
+                                 IRequestHandler<AceptInviteCommand>
     {
         private ILogger<EventsHandler> _logger;
         public IEventsRepository _eventsRepository;
@@ -100,6 +102,28 @@ namespace IATec.Calendar.Domain.Users.Handlers
 
                     if (isOverlapping != null)
                         throw new Exception("Eventos exclusivos não podem sobrepor outros eventos exclusivos, Já existe um evento que inicia/termina nesta Data/Hora!");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<Unit> Handle(AceptInviteCommand request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                switch (request.Status)
+                {
+                    case EStatus.ACCEPTED:
+                        await _eventsRepository.AceptEvent(request.ToEntity());
+                        return Unit.Value;
+                    case EStatus.REJECTED:
+                        await _eventsRepository.RejectEvent(request.ToEntity());
+                        return Unit.Value;
+                    default:
+                        throw new Exception("Ação inválida: ações cabíveis (Aceitar ou Rejeitar)!");
                 }
             }
             catch (Exception ex)

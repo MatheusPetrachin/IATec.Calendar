@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -38,6 +39,99 @@ namespace IATec.Calendar.Controllers.Events
             _logger = logger;
             _context = context;
         }
+
+        #region commands
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPost]
+        public async Task<IActionResult> Post([FromHeader] Guid userId,
+                                              [FromBody] CreateEventsCommand command)
+        {
+            try
+            {
+                command.SetUserId(userId);
+                command.UpdatePeriod();
+
+                await _mediator.Send(command);
+
+                return Ok(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPost("Invite")]
+        public async Task<IActionResult> PostEvent([FromBody][Required] AceptInviteCommand command)
+        {
+            try
+            {
+                await _mediator.Send(command);
+
+                return Ok(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] Guid id,
+                                              [FromHeader] Guid userId,
+                                              [FromBody] UpdateEventsCommand command)
+        {
+            try
+            {
+                command.SetId(id);
+                command.SetUserId(userId);
+                command.UpdatePeriod();
+
+                await _mediator.Send(command);
+
+                return Ok(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on PUT {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id, [FromHeader] Guid userId)
+        {
+            try
+            {
+                DeleteEventsCommand command = new DeleteEventsCommand();
+                command.SetId(id);
+                command.DeletedAt = DateTime.Now;
+                command.DeletedBy = userId;
+
+                await _mediator.Send(command);
+
+                return Ok(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on DELETE {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+        #endregion 
 
         /// <summary>
         /// Get Events.
@@ -144,78 +238,6 @@ namespace IATec.Calendar.Controllers.Events
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error on GET {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpPost]
-        public async Task<IActionResult> Post([FromHeader] Guid userId,
-                                              [FromBody] CreateEventsCommand command)
-        {
-            try
-            {
-                command.SetUserId(userId);
-                command.UpdatePeriod();
-
-                await _mediator.Send(command);
-
-                return Ok(command);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromRoute] Guid id,
-                                              [FromHeader] Guid userId,
-                                              [FromBody] UpdateEventsCommand command)
-        {
-            try
-            {
-                command.SetId(id);
-                command.SetUserId(userId);
-                command.UpdatePeriod();
-
-                await _mediator.Send(command);
-
-                return Ok(command);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error on PUT {this.GetType().Name}");
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id, [FromHeader] Guid userId)
-        {
-            try
-            {
-                DeleteEventsCommand command = new DeleteEventsCommand();
-                command.SetId(id);
-                command.DeletedAt = DateTime.Now;
-                command.DeletedBy = userId;
-
-                await _mediator.Send(command);
-
-                return Ok(command);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Error on DELETE {this.GetType().Name}");
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }

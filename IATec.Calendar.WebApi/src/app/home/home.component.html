@@ -123,11 +123,11 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Aceitar </th>
                         <td mat-cell *matCellDef="let element">
-                            <button mat-icon-button>
-                                <mat-icon (click)="inviteAction(element.inviteId, true)">check</mat-icon>
+                            <button mat-icon-button (click)="inviteAction(element.eventId, true)">
+                                <mat-icon>check</mat-icon>
                             </button>
-                            <button mat-icon-button>
-                                <mat-icon (click)="inviteAction(element.inviteId, false)">clear</mat-icon>
+                            <button mat-icon-button (click)="inviteAction(element.eventId, false)">
+                                <mat-icon>clear</mat-icon>
                             </button>
                         </td>
                     </ng-container>

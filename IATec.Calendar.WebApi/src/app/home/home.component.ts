@@ -125,10 +125,20 @@ export class HomeComponent {
   }
 
   inviteAction(eventId: string, acept: boolean) {
-    if (acept) {
-      this.dataService.aceptInvite();
-    } else {
-      this.dataService.rejectInvite();
+    if (eventId !== null) {
+      this.progressBarService.showLoad(true);
+      this.dataService.aceptRejectInvite(eventId, acept)
+        .subscribe({
+          next: (response) => {
+            this.toastService.success('Sucesso!');
+            this.progressBarService.showLoad(false);
+            this.dataService.reloadTable.emit(true)
+          },
+          error: (error) => {
+            this.toastService.error(error.error);
+            this.progressBarService.showLoad(false);
+          }
+        });
     }
   }
 }

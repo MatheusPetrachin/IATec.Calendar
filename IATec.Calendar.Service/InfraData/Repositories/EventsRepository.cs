@@ -1,10 +1,12 @@
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Commands;
 using IATec.Calendar.Domain.Events.Entities;
 using IATec.Calendar.Domain.Events.Handlers;
+using IATec.Calendar.Domain.UserEvents.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -67,6 +69,46 @@ namespace IATec.Calendar.InfraData.Repositories
                     // Adicionar quem vai participar
                     record.EventUsers.AddRange(eventEntityDomain.EventUsers.Where(id => !record.EventUsers.Contains(id)));
 
+                    await _context.SaveChangesAsync();
+                }
+                else
+                    throw new Exception("Evento não encontrado!");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task AceptEvent(UserEventEntityDomain userEventEntityDomain)
+        {
+            try
+            {
+                var record = await _context.UserEvents.Where(x => x.UserId == userEventEntityDomain.UserId && x.EventId == userEventEntityDomain.EventId).FirstOrDefaultAsync();
+
+                if (record != null)
+                {
+                    _context.Entry(record).CurrentValues.SetValues(userEventEntityDomain);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                    throw new Exception("Evento não encontrado!");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task RejectEvent(UserEventEntityDomain userEventEntityDomain)
+        {
+            try
+            {
+                var record = await _context.UserEvents.Where(x => x.UserId == userEventEntityDomain.UserId && x.EventId == userEventEntityDomain.EventId).FirstOrDefaultAsync();
+
+                if (record != null)
+                {
+                    _context.UserEvents.Remove(record);
                     await _context.SaveChangesAsync();
                 }
                 else
