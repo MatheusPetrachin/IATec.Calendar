@@ -74,10 +74,10 @@ export class LoginComponent {
           this.resetFormValidators();
           this.tabGroup.selectedIndex = 0;
         },
-        error: () => {
+        error: (error) => {
           this.authService.showLoginLoader.emit(false);
-          this.toastService.error('Erro!');
-          this.cadForm.reset();
+          console.log(error)
+          this.toastService.error(error.error);
         }
       });
     }

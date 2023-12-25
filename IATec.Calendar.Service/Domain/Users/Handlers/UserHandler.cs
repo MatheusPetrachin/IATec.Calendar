@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain.Users.Commands;
@@ -29,6 +30,11 @@ namespace IATec.Calendar.Domain.Users.Handlers
         {
             try
             {
+                if (_context.Users.Any(x => x.Email.Equals(request.Email)))
+                {
+                    throw new Exception("O e-mail fornecido já está em uso.");
+                }
+
                 await _repository.CreateAsync(request.ToEntity());
 
                 return Unit.Value;
@@ -36,7 +42,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return Unit.Value;
+                throw new Exception(ex.Message);
             }
         }
 
