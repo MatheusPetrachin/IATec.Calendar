@@ -1,11 +1,9 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Commands;
 using IATec.Calendar.Domain.Events.Entities;
 using IATec.Calendar.Domain.Events.Handlers;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace IATec.Calendar.InfraData.Repositories
@@ -48,6 +46,27 @@ namespace IATec.Calendar.InfraData.Repositories
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
+            }
+        }
+
+        public async Task UpdateAsync(EventEntityDomain eventEntityDomain)
+        {
+            try
+            {
+                var record = await _context.Events.FindAsync(eventEntityDomain.Id);
+
+                if (record != null)
+                {
+                    _context.Entry(record).CurrentValues.SetValues(eventEntityDomain);
+
+                    await _context.SaveChangesAsync();
+                }
+                else
+                    throw new Exception("Evento não encontrado!");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

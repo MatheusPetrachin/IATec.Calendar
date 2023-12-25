@@ -47,8 +47,8 @@ export class EventsComponent {
       id: new FormControl(this.eventModel ? this.eventModel.id : null),
       name: new FormControl(this.eventModel ? this.eventModel.name : '', [Validators.required]),
       description: new FormControl(this.eventModel ? this.eventModel.description : '', Validators.required),
-      startDate: new FormControl(this.eventModel ? this.eventModel.startDate : new Date(), Validators.required),
-      endDate: new FormControl(this.eventModel ? this.eventModel.endDate : new Date(), Validators.required),
+      startDate: new FormControl(this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.startDate)) : new Date(), Validators.required),
+      endDate: new FormControl(this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.endDate)) : new Date(), Validators.required),
       localization: new FormControl(this.eventModel ? this.eventModel.localization : '', Validators.required),
       startHour: new FormControl(this.eventModel ? this.eventModel.startHour : 0, Validators.required),
       startMinute: new FormControl(this.eventModel ? this.eventModel.startMinute : 0, Validators.required),
@@ -57,6 +57,16 @@ export class EventsComponent {
       participantIds: new FormControl(this.eventModel ? this.eventModel.participantIds : '', Validators.required)
     });
 
+  }
+
+  private removeTimeFromDate(inputDate: Date | null): Date | null {
+    if (inputDate === null) {
+      return null;
+    }
+    const year = inputDate.getFullYear();
+    const month = inputDate.getMonth();
+    const day = inputDate.getDate();
+    return new Date(year, month, day);
   }
 
   private getHours(): void {
@@ -106,6 +116,8 @@ export class EventsComponent {
     this.form.get('endDate')?.setErrors(null);
     this.form.get('endHour')?.setErrors(null);
     this.form.get('endMinute')?.setErrors(null);
+
+    console.log(event);
 
     const endDate = new Date(event.endDate.getFullYear(), event.endDate.getMonth(), event.endDate.getDate(), 0, 0, 0, 0);
     const startDate = new Date(event.startDate.getFullYear(), event.startDate.getMonth(), event.startDate.getDate(), 0, 0, 0, 0);

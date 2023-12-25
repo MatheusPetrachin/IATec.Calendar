@@ -67,7 +67,7 @@ export class DataService {
       'UserId': localStorage.getItem('UserId') ?? ''
     });
 
-    this.http.put<EventModel>(this.configService.apiUrl + "/Events", event, { headers }).subscribe({
+    this.http.put<EventModel>(this.configService.apiUrl + "/Events/" + event.id, event, { headers }).subscribe({
       next: (response) => {
         // this._snackBar.open('');
         this.loadingFormsEventEmitter.emit(false);

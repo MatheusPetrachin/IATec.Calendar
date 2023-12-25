@@ -8,5 +8,6 @@ namespace IATec.Calendar.Domain.Events.Handlers
     {
         Task CreateAsync(EventEntityDomain entity);
         Task DeleteAsync(DeleteEventsCommand request);
+        Task UpdateAsync(EventEntityDomain eventEntityDomain);
     }
 }

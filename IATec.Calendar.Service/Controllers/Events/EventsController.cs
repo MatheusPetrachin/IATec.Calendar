@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Commands;
@@ -100,6 +101,31 @@ namespace IATec.Calendar.Controllers.Events
         {
             try
             {
+                command.SetUserId(userId);
+                command.UpdatePeriod();
+
+                await _mediator.Send(command);
+
+                return Ok(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error on POST {this.GetType().Name}");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] Guid id,
+                                              [FromHeader] Guid userId,
+                                              [FromBody] UpdateEventsCommand command)
+        {
+            try
+            {
+                command.SetId(id);
                 command.SetUserId(userId);
                 command.UpdatePeriod();
 
