@@ -32,6 +32,9 @@ export class LoginComponent {
       }
     );
 
+    if (localStorage.getItem('Authorization') !== null)
+      this.router.navigate(['/home']);
+
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
