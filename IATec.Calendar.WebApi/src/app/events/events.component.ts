@@ -100,7 +100,7 @@ export class EventsComponent {
     this.selectedParticipants = participants
   }
 
-  submit(isEdit: boolean) {
+  submit() {
     var event = this.form.value as EventModel;
 
     this.form.get('endDate')?.setErrors(null);
@@ -113,19 +113,16 @@ export class EventsComponent {
     if (endDate.getTime() === startDate.getTime()) {
       if (event.endHour === event.startHour) {
         if (event.endMinute <= event.startMinute) {
-          console.log('invalid minute');
           this.form.get('endDate')?.setErrors({ 'InvalidEventEndDateTime': true });
           this.form.get('endHour')?.setErrors({ 'InvalidEventEndDateTime': true });
           this.form.get('endMinute')?.setErrors({ 'InvalidEventEndDateTime': true });
         }
       } else if (event.endHour < event.startHour) {
-        console.log('invalid hour');
         this.form.get('endDate')?.setErrors({ 'InvalidEventEndDateTime': true });
         this.form.get('endHour')?.setErrors({ 'InvalidEventEndDateTime': true });
         this.form.get('endMinute')?.setErrors({ 'InvalidEventEndDateTime': true });
       }
     } else if (endDate < startDate) {
-      console.log('invalid date');
       this.form.get('endDate')?.setErrors({ 'InvalidEventEndDateTime': true });
       this.form.get('endHour')?.setErrors({ 'InvalidEventEndDateTime': true });
       this.form.get('endMinute')?.setErrors({ 'InvalidEventEndDateTime': true });
@@ -135,10 +132,11 @@ export class EventsComponent {
     if (this.form.valid) {
       this.dataService.loadingFormsEventEmitter.emit(true);
 
-      if (isEdit)
-        this.dataService.updateEvent(event);
-      else
+      if (this.create)
         this.dataService.createEvent(event);
+      else
+        this.dataService.updateEvent(event);
+
     }
   }
 

@@ -49,12 +49,12 @@ export class DataService {
 
     this.http.post<EventModel>(this.configService.apiUrl + "/Events", event, { headers }).subscribe({
       next: (response) => {
-        // this._snackBar.open('');
+        this._toastService.success('Criado com sucesso!');
         this.loadingFormsEventEmitter.emit(false);
         this.router.navigate(['/home']);
       },
       error: (erro) => {
-        // this._snackBar.open('');
+        this._toastService.success('Erro ao criar!');
         this.loadingFormsEventEmitter.emit(false);
       }
     });
