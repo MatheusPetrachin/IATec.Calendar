@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain.Users.Commands;
 using IATec.Calendar.Domain.Users.Handlers;
@@ -60,11 +61,11 @@ namespace IATec.Calendar.Controllers.Users
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("All")]
         [Authorize]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromHeader][Required] Guid userId)
         {
             try
             {
-                var test = await _repository.SelectAllUsers();
+                var test = await _repository.SelectAllUsers(userId);
 
                 return Ok(test);
             }

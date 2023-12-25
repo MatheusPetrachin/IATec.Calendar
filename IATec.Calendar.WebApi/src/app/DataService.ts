@@ -113,7 +113,8 @@ export class DataService {
   selectUsers(): Observable<UserModel[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('Authorization') ?? ''
+      'Authorization': localStorage.getItem('Authorization') ?? '',
+      'UserId': localStorage.getItem('UserId') ?? ''
     });
 
     return this.http.get<UserModel[]>(this.configService.apiUrl + "/Users/All", { headers });

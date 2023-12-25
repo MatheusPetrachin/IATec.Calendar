@@ -11,7 +11,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
         #endregion
 
         #region queries
-        Task<List<UserEntityDomain>> SelectAllUsers();
+        Task<List<UserEntityDomain>> SelectAllUsers(System.Guid userId);
         #endregion
     }
 }

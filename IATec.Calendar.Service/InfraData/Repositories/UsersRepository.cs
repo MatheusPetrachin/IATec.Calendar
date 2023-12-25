@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Users.Entities;
@@ -33,11 +34,11 @@ namespace IATec.Calendar.InfraData.Repositories
             }
         }
 
-        public async Task<List<UserEntityDomain>> SelectAllUsers()
+        public async Task<List<UserEntityDomain>> SelectAllUsers(Guid userId)
         {
             try
             {
-                return await _context.Users.ToListAsync();
+                return await _context.Users.Where(x => x.Id != userId).ToListAsync();
             }
             catch (Exception ex)
             {

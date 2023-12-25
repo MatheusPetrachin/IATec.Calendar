@@ -77,7 +77,18 @@ namespace IATec.Calendar.Domain.Users.Handlers
                 validator(request);
 
                 var record = _context.Events.Find(request.Id);
-                await _eventsRepository.UpdateAsync(request.ToEntity(record));
+                var entity = request.ToEntity(record);
+                request.ParticipantIds?.ForEach(userId =>
+                {
+                    entity.Participants.Add(new UserEventEntityDomain()
+                    {
+                        EventId = entity.Id,
+                        UserId = userId
+                    });
+                });
+
+
+                await _eventsRepository.UpdateAsync(entity);
 
                 return Unit.Value;
             }

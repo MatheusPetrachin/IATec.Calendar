@@ -1,9 +1,13 @@
 using System;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Commands;
 using IATec.Calendar.Domain.Events.Entities;
 using IATec.Calendar.Domain.Events.Handlers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 
 namespace IATec.Calendar.InfraData.Repositories
@@ -54,10 +58,19 @@ namespace IATec.Calendar.InfraData.Repositories
             try
             {
                 var record = await _context.Events.FindAsync(eventEntityDomain.Id);
+                record.Participants = await _context.UserEvents.Where(x => x.EventId == eventEntityDomain.Id).ToListAsync();
 
                 if (record != null)
                 {
                     _context.Entry(record).CurrentValues.SetValues(eventEntityDomain);
+
+                    //remover quem não vai mais participar, adicionar quem vai participar e ignorar quem já esta participando
+
+                    // Remover quem não vai mais participar
+                    record.Participants = record.Participants.Where(id => eventEntityDomain.Participants.Contains(id)).ToList();
+
+                    // Adicionar quem vai participar
+                    record.Participants.AddRange(eventEntityDomain.Participants.Where(id => !record.Participants.Contains(id)));
 
                     await _context.SaveChangesAsync();
                 }
