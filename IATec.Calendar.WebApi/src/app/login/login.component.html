@@ -1,5 +1,5 @@
 <div class="login-container col-12 col-sm-8 col-md-6 col-lg-4">
-    <div class="text-center mb-3">
+    <div class="login-form text-center mb-3">
         <img src="assets\calendar.jpg" alt="Imagem 1">
     </div>
 
@@ -43,13 +43,19 @@
                     <mat-label for="password">Senha:</mat-label>
                     <input matInput type="password" id="password" formControlName="password" required>
                     <mat-error *ngIf="cadForm.get('password')?.hasError('required')">Senha obrigatória</mat-error>
+                    <mat-error *ngIf="cadForm.get('password')?.hasError('passwordLength')">Senha deve ter no mínimo 6
+                        dígitos.</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="col-12">
                     <mat-label for="confirmPassword">Confirmar Senha:</mat-label>
                     <input matInput type="password" id="confirmPassword" formControlName="confirmPassword" required>
-                    <mat-error *ngIf="cadForm.get('password')?.hasError('required')">Confirmação de Senha
-                        obrigatória</mat-error>
+                    <mat-error *ngIf="cadForm.get('password')?.hasError('required')">
+                        Confirmação de Senha obrigatória
+                    </mat-error>
+                    <mat-error *ngIf="cadForm.get('confirmPassword')?.hasError('passwordMismatch')">
+                        As senhas não correspondem!
+                    </mat-error>
                 </mat-form-field>
                 <div class="mb-3"><button type="submit" mat-button class="col-6">Entrar</button></div>
             </form>

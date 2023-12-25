@@ -49,6 +49,12 @@ export class LoginComponent {
   submitCad() {
     var user = this.cadForm.value as UserModel;
 
+    if (user.password.length < 6)
+      this.cadForm.get('password')?.setErrors({ 'passwordLength': true });
+
+    if (user.password !== user.confirmPassword)
+      this.cadForm.get('confirmPassword')?.setErrors({ 'passwordMismatch': true });
+
     if (this.cadForm.valid)
       console.log(user);
   }
