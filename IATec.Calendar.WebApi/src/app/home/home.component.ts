@@ -17,7 +17,8 @@ export class HomeComponent {
   constructor(private router: Router,
     private dataService: DataService,
     private authService: AuthService,
-    private progressBarService: ProgressBarService) {
+    private progressBarService: ProgressBarService,
+    private toastService: ToastService) {
     this.obterDataAtual()
   }
 
@@ -63,9 +64,9 @@ export class HomeComponent {
           console.log(error.message);
 
           if (error.status === 404) {
-            alert("Não há eventos para hoje!");
+            this.toastService.warning("Não há eventos para hoje!");
           } else {
-            alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            this.toastService.error("Ocorreu um erro inesperado. Tente novamente mais tarde.");
           }
         }
       });

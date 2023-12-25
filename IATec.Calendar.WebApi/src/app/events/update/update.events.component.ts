@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { EventModel } from '../../models/eventmodel';
 import { DataService } from '../../DataService';
 import { ActivatedRoute } from '@angular/router';
+import { ToastService } from '../../toast.service';
 
 @Component({
   selector: 'app-updateevents',
@@ -12,7 +13,7 @@ export class UpdateEventsComponent {
   eventModel!: EventModel;
   eventId: string | null = null;
 
-  constructor(private dataService: DataService, private route: ActivatedRoute) {
+  constructor(private dataService: DataService, private route: ActivatedRoute, private toastService: ToastService) {
 
   }
 
@@ -31,9 +32,9 @@ export class UpdateEventsComponent {
           console.log(error.message);
 
           if (error.status === 404) {
-            alert("Nada foi encontrado!");
+            this.toastService.warning("Nada foi encontrado!");
           } else {
-            alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+            this.toastService.warning("Ocorreu um erro inesperado. Tente novamente mais tarde.");
           }
         }
       });
