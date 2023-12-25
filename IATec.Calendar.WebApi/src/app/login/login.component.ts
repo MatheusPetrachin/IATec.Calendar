@@ -1,8 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './AuthService';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
+import { DataService } from '../DataService';
+import { ToastService } from '../toast.service';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +13,17 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  @ViewChild(MatTabGroup) tabGroup!: MatTabGroup;
 
   loading: boolean = false;
   loginForm!: FormGroup;
   cadForm!: FormGroup;
+  selectedTabIndex = 0;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private dataService: DataService,
+    private toastService: ToastService,
+    private router: Router) { }
 
   ngOnInit() {
     this.authService.showLoginLoader.subscribe(
@@ -55,9 +63,33 @@ export class LoginComponent {
     if (user.password !== user.confirmPassword)
       this.cadForm.get('confirmPassword')?.setErrors({ 'passwordMismatch': true });
 
-    if (this.cadForm.valid)
-      console.log(user);
+    if (this.cadForm.valid) {
+      this.authService.showLoginLoader.emit(true);
+
+      this.dataService.createUser(user).subscribe({
+        next: () => {
+          this.authService.showLoginLoader.emit(false);
+          this.toastService.success('Sucesso!');
+          this.cadForm.reset();
+          this.resetFormValidators();
+          this.tabGroup.selectedIndex = 0;
+        },
+        error: () => {
+          this.authService.showLoginLoader.emit(false);
+          this.toastService.error('Erro!');
+          this.cadForm.reset();
+        }
+      });
+    }
   }
+
+  resetFormValidators() {
+    Object.keys(this.cadForm.controls).forEach(key => {
+      this.cadForm.get(key)?.clearValidators();
+      this.cadForm.get(key)?.updateValueAndValidity();
+    });
+  }
+
 
   @Input() error!: string | null;
 

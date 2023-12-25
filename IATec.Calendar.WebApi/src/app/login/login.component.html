@@ -3,7 +3,7 @@
         <img src="assets\calendar.jpg" alt="Imagem 1">
     </div>
 
-    <mat-tab-group class="login-form">
+    <mat-tab-group [selectedIndex]="selectedTabIndex" class="login-form">
         <mat-tab label="Login">
             <form class="login-form" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
                 <div class="mb-3"></div>

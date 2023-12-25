@@ -7,6 +7,7 @@ import { UserModel } from './models/usermodel';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastService } from './toast.service';
+import { AuthService } from './login/AuthService';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class DataService {
 
   constructor(private http: HttpClient,
     private configService: ApiConfigServiceService,
+    private authService: AuthService,
     private _toastService: ToastService,
     private router: Router) { }
 
@@ -96,6 +98,14 @@ export class DataService {
         this.loadingFormsEventEmitter.emit(false);
       }
     });
+  }
+
+  createUser(user: UserModel): Observable<UserModel> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<UserModel>(this.configService.apiUrl + "/Users", user, { headers });
   }
 
   selectUsers(): Observable<UserModel[]> {
