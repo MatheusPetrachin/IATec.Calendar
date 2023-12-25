@@ -108,7 +108,7 @@ namespace IATec.Calendar.Domain.Users.Handlers
                 {
                     var listExclusiveEvents = _context.Events.Where(x => x.Id != request.Id && !x.Deleted && !x.Participants.Any() && x.CreatedBy == request.UserId);
 
-                    var isOverlapping = listExclusiveEvents.ToList().Find(record => record.StartDate < request.EndDate && request.StartDate < record.EndDate);
+                    var isOverlapping = listExclusiveEvents.ToList().Find(record => record.StartDate <= request.EndDate && request.StartDate <= record.EndDate);
 
                     if (isOverlapping != null)
                         throw new Exception("Eventos exclusivos não podem sobrepor outros eventos exclusivos, Já existe um evento que inicia/termina nesta Data/Hora!");

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../DataService';
 import { ToastService } from '../toast.service';
 import { MatTabGroup } from '@angular/material/tabs';
+import { ProgressBarService } from '../progressbar.service';
 
 @Component({
   selector: 'app-login',
@@ -23,15 +24,10 @@ export class LoginComponent {
   constructor(private authService: AuthService,
     private dataService: DataService,
     private toastService: ToastService,
-    private router: Router) { }
+    private router: Router,
+    private progressBarService: ProgressBarService) { }
 
   ngOnInit() {
-    this.authService.showLoginLoader.subscribe(
-      show => {
-        this.loading = show
-      }
-    );
-
     if (localStorage.getItem('Authorization') !== null)
       this.router.navigate(['/home']);
 
@@ -52,7 +48,7 @@ export class LoginComponent {
     var user = this.loginForm.value as UserModel;
 
     if (this.loginForm.valid) {
-      this.authService.showLoginLoader.emit(true);
+      this.progressBarService.showLoad(true);
       this.authService.login(user);
     }
   }
@@ -67,18 +63,18 @@ export class LoginComponent {
       this.cadForm.get('confirmPassword')?.setErrors({ 'passwordMismatch': true });
 
     if (this.cadForm.valid) {
-      this.authService.showLoginLoader.emit(true);
+      this.progressBarService.showLoad(true);
 
       this.dataService.createUser(user).subscribe({
         next: () => {
-          this.authService.showLoginLoader.emit(false);
+          this.progressBarService.showLoad(false);
           this.toastService.success('Sucesso!');
           this.cadForm.reset();
           this.resetFormValidators();
           this.tabGroup.selectedIndex = 0;
         },
         error: (error) => {
-          this.authService.showLoginLoader.emit(false);
+          this.progressBarService.showLoad(false);
           console.log(error)
           this.toastService.error(error.error);
         }

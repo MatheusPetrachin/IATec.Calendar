@@ -8,18 +8,18 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastService } from './toast.service';
 import { AuthService } from './login/AuthService';
+import { ProgressBarService } from './progressbar.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   reloadTable = new EventEmitter<boolean>();
-  loadingFormsEventEmitter = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient,
     private configService: ApiConfigServiceService,
-    private authService: AuthService,
-    private _toastService: ToastService,
+    private progressBarService: ProgressBarService,
+    private toastService: ToastService,
     private router: Router) { }
 
   getListEventData(userId: string, date: Date): Observable<EventModel[]> {
@@ -49,14 +49,14 @@ export class DataService {
 
     this.http.post<EventModel>(this.configService.apiUrl + "/Events", event, { headers }).subscribe({
       next: (response) => {
-        this._toastService.success('Criado com sucesso!');
-        this.loadingFormsEventEmitter.emit(false);
+        this.toastService.success('Criado com sucesso!');
+        this.progressBarService.showLoad(false);
         this.router.navigate(['/home']);
       },
       error: (error) => {
         console.log(error)
-        this._toastService.error(error.error);
-        this.loadingFormsEventEmitter.emit(false);
+        this.toastService.error(error.error);
+        this.progressBarService.showLoad(false);
       }
     });
   }
@@ -70,14 +70,14 @@ export class DataService {
 
     this.http.put<EventModel>(this.configService.apiUrl + "/Events/" + event.id, event, { headers }).subscribe({
       next: (response) => {
-        this._toastService.success('Atualizado com sucesso!');
-        this.loadingFormsEventEmitter.emit(false);
+        this.toastService.success('Atualizado com sucesso!');
+        this.progressBarService.showLoad(false);
         this.router.navigate(['/home']);
       },
       error: (error) => {
         console.log(error);
-        this._toastService.error(error.error);
-        this.loadingFormsEventEmitter.emit(false);
+        this.toastService.error(error.error);
+        this.progressBarService.showLoad(false);
       }
     });
   }
@@ -91,13 +91,13 @@ export class DataService {
 
     this.http.delete(this.configService.apiUrl + "/Events/" + id, { headers }).subscribe({
       next: (response) => {
-        this._toastService.success('Removido com sucesso!');
-        this.loadingFormsEventEmitter.emit(false);
+        this.toastService.success('Removido com sucesso!');
+        this.progressBarService.showLoad(false);
         this.reloadTable.emit(true)
       },
       error: (error) => {
-        this._toastService.success('Erro ao remover!');
-        this.loadingFormsEventEmitter.emit(false);
+        this.toastService.success('Erro ao remover!');
+        this.progressBarService.showLoad(false);
       }
     });
   }

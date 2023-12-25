@@ -35,6 +35,7 @@ import { CreateEventsComponent } from './events/create/create.events.component';
 import { UpdateEventsComponent } from './events/update/update.events.component';
 import { ToastService } from './toast.service';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { ProgressBarService } from './progressbar.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/mater
         duration: 4000
       } as MatSnackBarConfig,
     },
-    ToastService
+    ToastService,
+    ProgressBarService
   ],
   bootstrap: [AppComponent]
 })

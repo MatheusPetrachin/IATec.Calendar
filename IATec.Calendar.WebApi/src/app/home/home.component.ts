@@ -5,6 +5,7 @@ import { DataService } from '../DataService';
 import { AuthService } from '../login/AuthService';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastService } from '../toast.service';
+import { ProgressBarService } from '../progressbar.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent {
   constructor(private router: Router,
     private dataService: DataService,
     private authService: AuthService,
-    private _toastService: ToastService) {
+    private progressBarService: ProgressBarService) {
     this.obterDataAtual()
   }
 
@@ -71,8 +72,10 @@ export class HomeComponent {
   }
 
   deleteItem(id: string): void {
-    if (id !== null)
+    if (id !== null) {
+      this.progressBarService.showLoad(true);
       this.dataService.deleteEvent(id);
+    }
   }
 
   applyFilter(event: Event) {

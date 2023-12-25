@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../DataService';
 import { UserModel } from '../models/usermodel';
 import { EventModel } from '../models/eventmodel';
+import { ProgressBarService } from '../progressbar.service';
 
 interface selectModel {
   value: number;
@@ -30,18 +31,13 @@ export class EventsComponent {
   endMinute!: number;
   loading: boolean | null = false;
 
-  constructor(private router: Router, private dataService: DataService, private _formBuilder: FormBuilder) {
+  constructor(private router: Router, private dataService: DataService, private progressBarService: ProgressBarService) {
     this.getHours();
     this.getMinutes();
     this.getParticipants();
   }
 
   ngOnInit() {
-    this.dataService.loadingFormsEventEmitter.subscribe(
-      show => {
-        this.loading = show
-      }
-    );
 
     this.form = new FormGroup({
       id: new FormControl(this.eventModel ? this.eventModel.id : null),
@@ -142,7 +138,7 @@ export class EventsComponent {
     }
 
     if (this.form.valid) {
-      this.dataService.loadingFormsEventEmitter.emit(true);
+      this.progressBarService.showLoad(true);
 
       if (this.create)
         this.dataService.createEvent(event);

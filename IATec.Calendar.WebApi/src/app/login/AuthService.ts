@@ -5,6 +5,7 @@ import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
 import { ApiConfigServiceService } from '../ApiConfigServiceService';
 import { ToastService } from '../toast.service';
+import { ProgressBarService } from '../progressbar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class AuthService {
   constructor(private http: HttpClient,
     private configService: ApiConfigServiceService,
     private router: Router,
-    private _toastService: ToastService) { }
+    private _toastService: ToastService,
+    private progressBarService: ProgressBarService) { }
 
   showToolbarEmitter = new EventEmitter<boolean>();
-  showLoginLoader = new EventEmitter<boolean>();
 
   isLoggedIn(): boolean {
     this.showToolbarEmitter.emit(true);
@@ -34,7 +35,7 @@ export class AuthService {
         localStorage.setItem('UserName', response.name)
         localStorage.setItem('Authorization', 'Bearer ' + response.token)
         this.router.navigate(['/home']);
-        this.showLoginLoader.emit(false);
+        this.progressBarService.showLoad(false);
       },
       error: (error) => {
         console.log(error.message);
@@ -45,7 +46,7 @@ export class AuthService {
           this._toastService.error("Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
 
-        this.showLoginLoader.emit(false);
+        this.progressBarService.showLoad(false);
       }
     });
   }
