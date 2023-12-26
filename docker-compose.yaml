@@ -30,3 +30,12 @@ services:
     networks:
       - dev
     restart: always
+
+  angular:
+    image: frontend:latest
+    container_name: iateccalendar.webapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
