@@ -3,8 +3,18 @@ version: '3'
 networks:
   dev:
     driver: bridge
-    
 services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - dev
+
   backend:
     image: iateccalendar:latest
     ports:
@@ -13,18 +23,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=db;Database=iatec;Username=postgres;Password=postgres"
     networks:
       - dev
     restart: always
-
-  database:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_DB: iatec
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - dev
