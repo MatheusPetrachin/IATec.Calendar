@@ -59,8 +59,8 @@ export class EventsComponent {
       id: new FormControl(this.eventModel ? this.eventModel.id : null),
       name: new FormControl({ value: this.eventModel ? this.eventModel.name : '', disabled: this.readonly }, [Validators.required]),
       description: new FormControl({ value: this.eventModel ? this.eventModel.description : '', disabled: this.readonly }, Validators.required),
-      startDate: new FormControl({ value: this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.startDate)) : new Date(), disabled: this.readonly }, Validators.required),
-      endDate: new FormControl({ value: this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.endDate)) : new Date(), disabled: this.readonly }, Validators.required),
+      startDate: new FormControl({ value: this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.startDate)) : this.removeTimeFromDate(new Date()), disabled: this.readonly }, Validators.required),
+      endDate: new FormControl({ value: this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.endDate)) : this.removeTimeFromDate(new Date()), disabled: this.readonly }, Validators.required),
       localization: new FormControl({ value: this.eventModel ? this.eventModel.localization : '', disabled: this.readonly }, Validators.required),
       startHour: new FormControl({ value: this.eventModel ? this.eventModel.startHour : 0, disabled: this.readonly }, Validators.required),
       startMinute: new FormControl({ value: this.eventModel ? this.eventModel.startMinute : 0, disabled: this.readonly }, Validators.required),
@@ -68,8 +68,6 @@ export class EventsComponent {
       endMinute: new FormControl({ value: this.eventModel ? this.eventModel.endMinute : 0, disabled: this.readonly }, Validators.required),
       participantIds: new FormControl({ value: this.eventModel ? this.eventModel.participantIds : [], disabled: this.readonly })
     });
-
-
   }
 
   private removeTimeFromDate(inputDate: Date | null): Date | null {

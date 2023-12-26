@@ -44,7 +44,7 @@ export class HomeComponent {
   date: Date = new Date();
 
   ngOnInit() {
-    this.userId == localStorage.getItem('UserId') ?? '';
+    this.userId = localStorage.getItem('UserId') ?? '';
     this.authService.showToolbarEmitter.emit(true);
 
     this.dataService.reloadTable.subscribe(
