@@ -34,7 +34,7 @@ export class HomeComponent {
   }
 
   eventsDataSource: MatTableDataSource<EventModel> = new MatTableDataSource();
-  eventsDisplayedColumns: string[] = ['eventDate', 'name', 'description', 'localization', 'status', 'actions'];
+  eventsDisplayedColumns: string[] = ['startDate', 'endDate', 'event', 'localization', 'actions'];
   eventsResultsLength = 0;
 
   invitationsDataSource: MatTableDataSource<InviteModel> = new MatTableDataSource();

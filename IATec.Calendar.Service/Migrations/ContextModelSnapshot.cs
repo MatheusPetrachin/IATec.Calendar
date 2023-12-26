@@ -110,13 +110,13 @@ namespace iatec.calendar.Migrations
             modelBuilder.Entity("IATec.Calendar.Domain.UserEvents.Entities.UserEventEntityDomain", b =>
                 {
                     b.HasOne("IATec.Calendar.Domain.Events.Entities.EventEntityDomain", "Event")
-                        .WithMany("Participants")
+                        .WithMany("EventUsers")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IATec.Calendar.Domain.Users.Entities.UserEntityDomain", "User")
-                        .WithMany("Events")
+                        .WithMany("UserEvents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

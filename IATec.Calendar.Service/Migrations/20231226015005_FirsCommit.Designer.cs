@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace iatec.calendar.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231224184450_AlterEventTable")]
-    partial class AlterEventTable
+    [Migration("20231226015005_FirsCommit")]
+    partial class FirsCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,6 +79,9 @@ namespace iatec.calendar.Migrations
                     b.Property<Guid>("EventId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
                     b.HasKey("UserId", "EventId");
 
                     b.HasIndex("EventId");
@@ -109,13 +112,13 @@ namespace iatec.calendar.Migrations
             modelBuilder.Entity("IATec.Calendar.Domain.UserEvents.Entities.UserEventEntityDomain", b =>
                 {
                     b.HasOne("IATec.Calendar.Domain.Events.Entities.EventEntityDomain", "Event")
-                        .WithMany("Participants")
+                        .WithMany("EventUsers")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IATec.Calendar.Domain.Users.Entities.UserEntityDomain", "User")
-                        .WithMany("Events")
+                        .WithMany("UserEvents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

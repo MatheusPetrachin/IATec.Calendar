@@ -151,7 +151,7 @@ namespace IATec.Calendar.Controllers.Events
                 events.AddRange(await _context.Events.Where(x => x.CreatedBy == userId && !x.Deleted).ToListAsync());
                 events.AddRange(await _context.Events.Where(x => aceptedInvitesEvents.Contains(x.Id) && !x.Deleted).ToListAsync());
 
-                return Ok(events.Where(x => x.StartDate.Date == period.Date));
+                return Ok(events.Where(x => x.StartDate.Date == period.Date).OrderBy(x => x.StartDate).ThenBy(x => x.EndDate));
             }
             catch (Exception ex)
             {
@@ -238,7 +238,7 @@ namespace IATec.Calendar.Controllers.Events
                     });
                 }
 
-                return Ok(selectInvites);
+                return Ok(selectInvites.OrderBy(x => x.StartDate).ThenBy(x => x.EndDate));
             }
             catch (Exception ex)
             {

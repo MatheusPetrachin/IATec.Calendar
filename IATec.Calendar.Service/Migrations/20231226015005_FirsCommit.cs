@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace iatec.calendar.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class FirsCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,13 +21,17 @@ namespace iatec.calendar.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    EventDate = table.Column<DateTime>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false),
                     Localization = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     CreatedBy = table.Column<Guid>(nullable: false),
                     CreatdAt = table.Column<DateTime>(nullable: false),
                     UpdatedBy = table.Column<Guid>(nullable: true),
-                    UpdatedAt = table.Column<DateTime>(nullable: true)
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    Deleted = table.Column<bool>(nullable: false),
+                    DeletedBy = table.Column<Guid>(nullable: true),
+                    DeletedAt = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,7 +59,8 @@ namespace iatec.calendar.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
-                    EventId = table.Column<Guid>(nullable: false)
+                    EventId = table.Column<Guid>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
