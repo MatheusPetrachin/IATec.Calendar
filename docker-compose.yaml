@@ -1,0 +1,30 @@
+version: '3'
+
+networks:
+  dev:
+    driver: bridge
+    
+services:
+  backend:
+    image: iateccalendar:latest
+    ports:
+      - 8050:80
+    container_name: iateccalendar.service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - dev
+    restart: always
+
+  database:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: iatec
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - dev
