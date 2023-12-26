@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "IATec.Calendar.WebApi": {
+    "IATec.Calendar.WebApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "IATec.Calendar.WebApi:build:production"
+              "buildTarget": "IATec.Calendar.WebApp:build:production"
             },
             "development": {
-              "buildTarget": "IATec.Calendar.WebApi:build:development"
+              "buildTarget": "IATec.Calendar.WebApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "IATec.Calendar.WebApi:build"
+            "buildTarget": "IATec.Calendar.WebApp:build"
           }
         },
         "test": {
