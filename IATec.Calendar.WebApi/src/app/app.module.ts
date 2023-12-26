@@ -16,9 +16,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AuthGuardService } from './authguardservice';
+import { AuthGuardService } from './app-auth.guard.service';
 import { EventsComponent } from './events/events.component';
-import { ApiConfigServiceService } from './ApiConfigServiceService';
+import { ApiConfigServiceService } from './app-config.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -33,9 +33,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CreateEventsComponent } from './events/create/create.events.component';
 import { UpdateEventsComponent } from './events/update/update.events.component';
-import { ToastService } from './toast.service';
+import { ToastService } from './app-toast.service';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { ProgressBarService } from './progressbar.service';
+import { ProgressBarService } from './app-progress.bar.service';
+import { ViewEventComponent } from './events/view/view.events.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ProgressBarService } from './progressbar.service';
     HomeComponent,
     EventsComponent,
     CreateEventsComponent,
-    UpdateEventsComponent
+    UpdateEventsComponent,
+    ViewEventComponent
   ],
   imports: [
     BrowserModule,

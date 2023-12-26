@@ -1,6 +1,6 @@
 <mat-card class="container col-6 col-sm-6 col-md-8">
     <mat-card-header>
-        <mat-card-title>{{create ? 'Cadastrar' : 'Atualizar'}} Evento</mat-card-title>
+        <mat-card-title>{{title}} Evento</mat-card-title>
         <mat-card-subtitle>preencha o formulário</mat-card-subtitle>
     </mat-card-header>
 
@@ -25,7 +25,7 @@
             <mat-label>Data do evento</mat-label>
             <input matInput [matDatepicker]="startDatepicker" formControlName="startDate">
             <mat-datepicker-toggle matIconSuffix [for]="startDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #startDatepicker>
+            <mat-datepicker #startDatepicker [disabled]="readonly">
                 <mat-datepicker-actions>
                     <button mat-button matDatepickerCancel>Cancel</button>
                     <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
@@ -36,7 +36,8 @@
             <mat-label for="startHour">Hora</mat-label>
             <mat-select name="startHour" id="startHour" formControlName="startHour">
                 @for (hour of hours; track hour) {
-                <mat-option [value]="hour.value">{{hour.viewValue.toString().padStart(2, '0')}}</mat-option>
+                <mat-option [value]="hour.value">{{hour.viewValue.toString().padStart(2,
+                    '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -44,7 +45,8 @@
             <mat-label for="startMinute">Minuto</mat-label>
             <mat-select name="startMinute" id="startMinute" formControlName="startMinute">
                 @for (minute of minutes; track minute) {
-                <mat-option [value]="minute.value">{{minute.viewValue.toString().padStart(2, '0')}}</mat-option>
+                <mat-option [value]="minute.value">{{minute.viewValue.toString().padStart(2,
+                    '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -58,7 +60,7 @@
             <mat-error *ngIf="form.get('endDate')?.hasError('InvalidEventEndDateTime')">Data/Hora para o fim do
                 evento inválida!</mat-error>
             <mat-datepicker-toggle matIconSuffix [for]="endDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #endDatepicker>
+            <mat-datepicker #endDatepicker [disabled]="readonly">
                 <mat-datepicker-actions>
                     <button mat-button matDatepickerCancel>Cancel</button>
                     <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
@@ -67,17 +69,19 @@
         </mat-form-field>
         <mat-form-field class="col-2">
             <mat-label for="endHour">Hora</mat-label>
-            <mat-select name="endHour" id="endHour" formControlName="endHour">
+            <mat-select name="endHour" id="endHour" formControlName="endHour" [disabled]="readonly">
                 @for (hour of hours; track hour) {
-                <mat-option [value]="hour.value">{{hour.viewValue.toString().padStart(2, '0')}}</mat-option>
+                <mat-option [value]="hour.value">{{hour.viewValue.toString().padStart(2,
+                    '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
         <mat-form-field class="col-2">
             <mat-label for="endMinute">Minuto</mat-label>
-            <mat-select name="endMinute" id="endMinute" formControlName="endMinute">
+            <mat-select name="endMinute" id="endMinute" formControlName="endMinute" [disabled]=true>
                 @for (minute of minutes; track minute) {
-                <mat-option [value]="minute.value">{{minute.viewValue.toString().padStart(2, '0')}}</mat-option>
+                <mat-option [value]="minute.value">{{minute.viewValue.toString().padStart(2,
+                    '0')}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
@@ -97,7 +101,8 @@
         </mat-form-field>
 
         <mat-card-actions class="col-12 container">
-            <button mat-raised-button color="primary" class="col-6" type="submit">{{create ? 'Cadastrar' :
+            <button mat-raised-button color="primary" class="col-6" type="submit" *ngIf="onlyview === false">{{create ?
+                'Cadastrar' :
                 'Atualizar'}}</button>
             <br />
             <button mat-raised-button class="col-6" (click)="redirect('home')">Cancelar</button>

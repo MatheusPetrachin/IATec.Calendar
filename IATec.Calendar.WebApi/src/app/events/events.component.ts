@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '../dataservice';
+import { DataService } from '../app-data.service';
 import { UserModel } from '../models/usermodel';
 import { EventModel } from '../models/eventmodel';
-import { ProgressBarService } from '../progressbar.service';
+import { ProgressBarService } from '../app-progress.bar.service';
 
 interface selectModel {
   value: number;
@@ -17,6 +17,7 @@ interface selectModel {
 })
 export class EventsComponent {
   @Input() create: boolean = false;
+  @Input() onlyview: boolean = false;
   @Input() eventModel: EventModel | null = null;
 
   form!: FormGroup;
@@ -30,6 +31,9 @@ export class EventsComponent {
   endHour!: number;
   endMinute!: number;
   loading: boolean | null = false;
+  title!: string;
+  readonly!: boolean;
+  disableSelect = new FormControl(false);
 
   constructor(private router: Router, private dataService: DataService, private progressBarService: ProgressBarService) {
     this.getHours();
@@ -38,20 +42,33 @@ export class EventsComponent {
   }
 
   ngOnInit() {
+    if (this.onlyview) {
+      this.title = 'Visualizar'
+      this.readonly = true;
+    }
+    else if (this.create) {
+      this.title = 'Cadastrar'
+      this.readonly = false;
+    }
+    else {
+      this.title = 'Atualizar'
+      this.readonly = false;
+    }
 
     this.form = new FormGroup({
       id: new FormControl(this.eventModel ? this.eventModel.id : null),
-      name: new FormControl(this.eventModel ? this.eventModel.name : '', [Validators.required]),
-      description: new FormControl(this.eventModel ? this.eventModel.description : '', Validators.required),
-      startDate: new FormControl(this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.startDate)) : new Date(), Validators.required),
-      endDate: new FormControl(this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.endDate)) : new Date(), Validators.required),
-      localization: new FormControl(this.eventModel ? this.eventModel.localization : '', Validators.required),
-      startHour: new FormControl(this.eventModel ? this.eventModel.startHour : 0, Validators.required),
-      startMinute: new FormControl(this.eventModel ? this.eventModel.startMinute : 0, Validators.required),
-      endHour: new FormControl(this.eventModel ? this.eventModel.endHour : 0, Validators.required),
-      endMinute: new FormControl(this.eventModel ? this.eventModel.endMinute : 0, Validators.required),
-      participantIds: new FormControl(this.eventModel ? this.eventModel.participantIds : [])
+      name: new FormControl({ value: this.eventModel ? this.eventModel.name : '', disabled: this.readonly }, [Validators.required]),
+      description: new FormControl({ value: this.eventModel ? this.eventModel.description : '', disabled: this.readonly }, Validators.required),
+      startDate: new FormControl({ value: this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.startDate)) : new Date(), disabled: this.readonly }, Validators.required),
+      endDate: new FormControl({ value: this.eventModel ? this.removeTimeFromDate(new Date(this.eventModel.endDate)) : new Date(), disabled: this.readonly }, Validators.required),
+      localization: new FormControl({ value: this.eventModel ? this.eventModel.localization : '', disabled: this.readonly }, Validators.required),
+      startHour: new FormControl({ value: this.eventModel ? this.eventModel.startHour : 0, disabled: this.readonly }, Validators.required),
+      startMinute: new FormControl({ value: this.eventModel ? this.eventModel.startMinute : 0, disabled: this.readonly }, Validators.required),
+      endHour: new FormControl({ value: this.eventModel ? this.eventModel.endHour : 0, disabled: this.readonly }, Validators.required),
+      endMinute: new FormControl({ value: this.eventModel ? this.eventModel.endMinute : 0, disabled: this.readonly }, Validators.required),
+      participantIds: new FormControl({ value: this.eventModel ? this.eventModel.participantIds : [], disabled: this.readonly })
     });
+
 
   }
 

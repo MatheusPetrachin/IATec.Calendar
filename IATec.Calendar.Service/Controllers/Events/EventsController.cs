@@ -145,7 +145,12 @@ namespace IATec.Calendar.Controllers.Events
         {
             try
             {
-                var events = await _context.Events.Where(x => x.CreatedBy == userId && x.StartDate.Date == period.Date && !x.Deleted).ToListAsync();
+                var aceptedInvitesEvents = await _context.UserEvents.Where(x => x.UserId == userId && x.Status == Enums.EStatus.ACCEPTED).Select(x => x.EventId).ToListAsync();
+
+                List<EventEntityDomain> events = new List<EventEntityDomain>();
+                events.AddRange(await _context.Events.Where(x => x.CreatedBy == userId && x.StartDate.Date == period.Date && !x.Deleted).ToListAsync());
+                events.AddRange(await _context.Events.Where(x => aceptedInvitesEvents.Contains(x.Id) && !x.Deleted).ToListAsync());
+
                 return Ok(events);
             }
             catch (Exception ex)

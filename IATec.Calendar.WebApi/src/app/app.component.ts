@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './login/AuthService';
-import { ProgressBarService } from './progressbar.service';
+import { ProgressBarService } from './app-progress.bar.service';
 
 @Component({
   selector: 'app-root',

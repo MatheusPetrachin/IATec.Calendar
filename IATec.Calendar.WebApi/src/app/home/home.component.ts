@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventModel } from '../models/eventmodel';
-import { DataService } from '../dataservice';
+import { DataService } from '../app-data.service';
 import { AuthService } from '../login/AuthService';
 import { MatTableDataSource } from '@angular/material/table';
-import { ToastService } from '../toast.service';
-import { ProgressBarService } from '../progressbar.service';
+import { ToastService } from '../app-toast.service';
+import { ProgressBarService } from '../app-progress.bar.service';
 import { InviteModel } from '../models/invitemodel';
 import {
   MatDialog,
@@ -22,6 +22,7 @@ import {
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  userId: string = '';
 
   constructor(private router: Router,
     private dataService: DataService,
@@ -43,6 +44,7 @@ export class HomeComponent {
   date: Date = new Date();
 
   ngOnInit() {
+    this.userId == localStorage.getItem('UserId') ?? '';
     this.authService.showToolbarEmitter.emit(true);
 
     this.dataService.reloadTable.subscribe(
@@ -56,9 +58,11 @@ export class HomeComponent {
     this.loadData(this.date)
   }
 
-  redirect(page: string, id: string | null) {
+  redirect(page: string, onlyview: boolean, id: string | null) {
     if (id === null)
       this.router.navigate(['/' + page]);
+    else if (onlyview)
+      this.router.navigate(['/events/view', id])
     else
       this.router.navigate(['/events/edit', id]);
   }

@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
-import { ApiConfigServiceService } from './ApiConfigServiceService';
+import { ApiConfigServiceService } from './app-config.service';
 import { EventModel } from './models/eventmodel';
 import { UserModel } from './models/usermodel';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ToastService } from './toast.service';
+import { ToastService } from './app-toast.service';
 import { AuthService } from './login/AuthService';
-import { ProgressBarService } from './progressbar.service';
+import { ProgressBarService } from './app-progress.bar.service';
 import { InviteModel } from './models/invitemodel';
 
 @Injectable({

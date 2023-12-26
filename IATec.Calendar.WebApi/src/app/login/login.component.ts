@@ -3,10 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from './AuthService';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
-import { DataService } from '../dataservice';
-import { ToastService } from '../toast.service';
+import { DataService } from '../app-data.service';
+import { ToastService } from '../app-toast.service';
 import { MatTabGroup } from '@angular/material/tabs';
-import { ProgressBarService } from '../progressbar.service';
+import { ProgressBarService } from '../app-progress.bar.service';
 
 @Component({
   selector: 'app-login',

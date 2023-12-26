@@ -5,11 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastService } from '../../app-toast.service';
 
 @Component({
-  selector: 'app-updateevents',
-  templateUrl: './update.events.component.html',
-  styleUrl: './update.events.component.scss'
+  selector: 'app-view',
+  templateUrl: './view.events.component.html',
+  styleUrl: './view.events.component.scss'
 })
-export class UpdateEventsComponent {
+export class ViewEventComponent {
   eventModel!: EventModel;
   eventId: string | null = null;
 

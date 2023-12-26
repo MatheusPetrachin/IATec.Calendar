@@ -3,9 +3,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserModel } from '../models/usermodel';
 import { Router } from '@angular/router';
-import { ApiConfigServiceService } from '../ApiConfigServiceService';
-import { ToastService } from '../toast.service';
-import { ProgressBarService } from '../progressbar.service';
+import { ApiConfigServiceService } from '../app-config.service';
+import { ToastService } from '../app-toast.service';
+import { ProgressBarService } from '../app-progress.bar.service';
 
 @Injectable({
   providedIn: 'root'
