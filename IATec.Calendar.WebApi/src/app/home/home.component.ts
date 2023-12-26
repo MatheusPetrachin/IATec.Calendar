@@ -72,6 +72,7 @@ export class HomeComponent {
   }
 
   loadData(date: Date): void {
+    console.log(date);
     this.dataService.getListEventData(localStorage.getItem('UserId') ?? '', date)
       .subscribe({
         next: (response) => {
