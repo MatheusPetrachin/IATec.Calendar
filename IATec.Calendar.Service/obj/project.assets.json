@@ -5741,11 +5741,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj",
-      "projectName": "IATec.Calendar",
-      "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj",
+      "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj",
+      "projectName": "iatec.calendar",
+      "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj",
       "packagesPath": "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATec.Calendar.Service\\obj\\",
+      "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MatheusRoquePetrachi\\NuGet.Config",
@@ -5832,7 +5832,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "IATec.Calendar depende de Npgsql.EntityFrameworkCore.PostgreSQL (>= 3.1.14), mas Npgsql.EntityFrameworkCore.PostgreSQL 3.1.14 não foi encontrado. A melhor correspondência aproximada de Npgsql.EntityFrameworkCore.PostgreSQL 3.1.18 foi resolvida.",
+      "message": "iatec.calendar depende de Npgsql.EntityFrameworkCore.PostgreSQL (>= 3.1.14), mas Npgsql.EntityFrameworkCore.PostgreSQL 3.1.14 não foi encontrado. A melhor correspondência aproximada de Npgsql.EntityFrameworkCore.PostgreSQL 3.1.18 foi resolvida.",
       "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"

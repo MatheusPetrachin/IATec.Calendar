@@ -16,7 +16,7 @@ services:
       - dev
 
   backend:
-    image: iateccalendar:latest
+    image: backend:latest
     ports:
       - 8050:80
     container_name: iateccalendar.service
