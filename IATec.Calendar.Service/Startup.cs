@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-using System.Reflection;
 using System.Text;
 using IATec.Calendar.Domain;
 using IATec.Calendar.Domain.Events.Handlers;
@@ -125,6 +122,9 @@ namespace IATec.Calendar
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

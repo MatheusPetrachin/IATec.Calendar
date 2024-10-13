@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ApiConfigServiceService {
-  public apiUrl = 'http://localhost:8050';
+  public apiUrl = 'https://iatec-calendar-backend.fly.dev';
 }

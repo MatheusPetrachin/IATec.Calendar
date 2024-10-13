@@ -14,28 +14,34 @@ services:
       - "5432:5432"
     networks:
       - dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   backend:
-    image: backend:latest
-    ports:
-      - 8050:80
-    container_name: iateccalendar.service
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8080:8080"
+    container_name: iateccalendar.service
     environment:
-      ENVIRONMENT: Development
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: "Host=db;Database=iatec;Username=postgres;Password=postgres"
     networks:
       - dev
     restart: always
+    depends_on:
+      - db
 
-  angular:
-    image: frontend:latest
-    container_name: iateccalendar.webapp
+  frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend
     ports:
-      - 4200:4200
+      - "8002:80"
+    container_name: iateccalendar.webapp
+    volumes:
+      - ./IATEC.Calendar.WebApp/dist:/app/wwwroot
+
+volumes:
+  postgres_data:

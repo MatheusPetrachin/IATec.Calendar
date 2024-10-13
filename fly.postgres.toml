@@ -1,0 +1,19 @@
+app = "iatec-calendar-postgres"  # Substitua pelo nome do seu aplicativo
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[build]
+  dockerfile = "Dockerfile.postgres"  # Caminho para o seu Dockerfile
+
+[env]
+  POSTGRES_DB = "meu_banco"         # Nome do banco de dados a ser criado
+  POSTGRES_USER = "usuario"          # Nome do usuário do PostgreSQL
+  POSTGRES_PASSWORD = "senha"         # Senha do usuário do PostgreSQL
+
+[mounts]
+  source = "data"                   # Nome do volume que você deseja usar
+  destination = "/var/lib/postgresql/data"  # Caminho no contêiner onde o volume será montado
+
+[deploy]
+  release_command = "echo 'Database has been deployed!'"  # Comando a ser executado após o deploy

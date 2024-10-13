@@ -1,0 +1,26 @@
+app = "iatec-calendar-backend"
+primary_region = "gru"
+
+[build]
+  dockerfile = "Dockerfile.backend"
+
+[env]
+  ASPNETCORE_URLS = "http://+:8080"
+
+[http_service]
+  internal_port = 80
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 5432
+
+  [[services.ports]]
+    port = 5432
+
+[mounts]
+  source = "postgres_data"
+  destination = "/var/lib/postgresql/data"
