@@ -1,0 +1,44 @@
+# flyctl launch added from IATec.Calendar.WebApp\.gitignore
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+IATec.Calendar.WebApp\dist
+IATec.Calendar.WebApp\tmp
+IATec.Calendar.WebApp\out-tsc
+IATec.Calendar.WebApp\bazel-out
+
+# Node
+IATec.Calendar.WebApp\node_modules
+IATec.Calendar.WebApp\**\npm-debug.log
+IATec.Calendar.WebApp\**\yarn-error.log
+
+# IDEs and editors
+IATec.Calendar.WebApp\**\.idea
+IATec.Calendar.WebApp\**\.project
+IATec.Calendar.WebApp\**\.classpath
+IATec.Calendar.WebApp\**\.c9
+IATec.Calendar.WebApp\**\*.launch
+IATec.Calendar.WebApp\**\.settings
+IATec.Calendar.WebApp\**\*.sublime-workspace
+
+# Visual Studio Code
+IATec.Calendar.WebApp\**\.vscode\*
+!IATec.Calendar.WebApp\**\.vscode\settings.json
+!IATec.Calendar.WebApp\**\.vscode\tasks.json
+!IATec.Calendar.WebApp\**\.vscode\launch.json
+!IATec.Calendar.WebApp\**\.vscode\extensions.json
+IATec.Calendar.WebApp\**\.history\*
+
+# Miscellaneous
+IATec.Calendar.WebApp\.angular\cache
+IATec.Calendar.WebApp\**\.sass-cache
+IATec.Calendar.WebApp\connect.lock
+IATec.Calendar.WebApp\coverage
+IATec.Calendar.WebApp\libpeerconnection.log
+IATec.Calendar.WebApp\**\testem.log
+IATec.Calendar.WebApp\typings
+
+# System files
+IATec.Calendar.WebApp\**\.DS_Store
+IATec.Calendar.WebApp\**\Thumbs.db
+fly.toml
