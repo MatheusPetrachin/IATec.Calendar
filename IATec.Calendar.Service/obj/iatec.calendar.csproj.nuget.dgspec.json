@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj": {}
+    "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj": {
+    "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj",
-        "projectName": "iatec.calendar",
-        "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj",
+        "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj",
+        "projectName": "IATec.Calendar",
+        "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj",
         "packagesPath": "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\obj\\",
+        "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\MatheusRoquePetrachi\\NuGet.Config",
@@ -21,7 +21,8 @@
           "netcoreapp3.1"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.pkg.github.com/MatheusPetrachin/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {

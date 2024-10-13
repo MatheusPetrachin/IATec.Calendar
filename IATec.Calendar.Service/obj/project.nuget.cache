@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZMHOHGuIM/RuQO1CMsmitdrjCpM3dKLCPXAWN/JL75yy0qZm1NpY/LxUIXprnL+B0ihV8MATD1ADWDngaJtgLg==",
+  "dgSpecHash": "KPdAUW9IPeWM/E/5b/xpNmutF3K3c3BnNdvhB3D8ATW+75ZrkJnbNlD1I7nGu7+Tno2Br0VIdTWkMzpZK0bkNg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj",
+  "projectFilePath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\mediatr\\8.0.1\\mediatr.8.0.1.nupkg.sha512",
     "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\8.0.0\\mediatr.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",
@@ -121,7 +121,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "iatec.calendar depende de Npgsql.EntityFrameworkCore.PostgreSQL (>= 3.1.14), mas Npgsql.EntityFrameworkCore.PostgreSQL 3.1.14 não foi encontrado. A melhor correspondência aproximada de Npgsql.EntityFrameworkCore.PostgreSQL 3.1.18 foi resolvida.",
+      "message": "IATec.Calendar depends on Npgsql.EntityFrameworkCore.PostgreSQL (>= 3.1.14) but Npgsql.EntityFrameworkCore.PostgreSQL 3.1.14 was not found. An approximate best match of Npgsql.EntityFrameworkCore.PostgreSQL 3.1.18 was resolved.",
       "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"

@@ -5741,11 +5741,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj",
-      "projectName": "iatec.calendar",
-      "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\iatec.calendar.csproj",
+      "projectUniqueName": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj",
+      "projectName": "IATec.Calendar",
+      "projectPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\IATec.Calendar.csproj",
       "packagesPath": "C:\\Users\\MatheusRoquePetrachi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\IATec.Calendar\\IATEC.Calendar.Service\\obj\\",
+      "outputPath": "C:\\Users\\MatheusRoquePetrachi\\Documents\\PERSONAL\\MY_Projects\\IATec.Calendar\\IATec.Calendar.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MatheusRoquePetrachi\\NuGet.Config",
@@ -5755,7 +5755,8 @@
         "netcoreapp3.1"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.pkg.github.com/MatheusPetrachin/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
@@ -5832,7 +5833,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "iatec.calendar depende de Npgsql.EntityFrameworkCore.PostgreSQL (>= 3.1.14), mas Npgsql.EntityFrameworkCore.PostgreSQL 3.1.14 não foi encontrado. A melhor correspondência aproximada de Npgsql.EntityFrameworkCore.PostgreSQL 3.1.18 foi resolvida.",
+      "message": "IATec.Calendar depends on Npgsql.EntityFrameworkCore.PostgreSQL (>= 3.1.14) but Npgsql.EntityFrameworkCore.PostgreSQL 3.1.14 was not found. An approximate best match of Npgsql.EntityFrameworkCore.PostgreSQL 3.1.18 was resolved.",
       "libraryId": "Npgsql.EntityFrameworkCore.PostgreSQL",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"
