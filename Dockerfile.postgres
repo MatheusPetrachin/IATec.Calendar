@@ -1,15 +1,7 @@
-# Use a imagem oficial do PostgreSQL como base
 FROM postgres:latest
 
-# Defina variáveis de ambiente para a configuração do banco de dados
 ENV POSTGRES_DB=calendar
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=senha123
 
-# Copie scripts de inicialização, se houver
-# COPY ./init-scripts /docker-entrypoint-initdb.d/
-
-# Exponha a porta padrão do PostgreSQL
 EXPOSE 5432
-
-# O comando padrão já está definido na imagem base

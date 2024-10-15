@@ -2,7 +2,7 @@ app = "iatec-calendar-backend"
 primary_region = "gru"
 
 [build]
-  dockerfile = "Dockerfile.backend"
+  dockerfile = "Dockerfile"
 
 [env]
   ASPNETCORE_URLS = "http://+:8080"
