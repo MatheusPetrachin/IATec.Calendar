@@ -1,5 +1,5 @@
 {
-  "name": "iatec.calendar.web-api",
+  "name": "iatec.calendar.web-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

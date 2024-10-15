@@ -1,0 +1,15 @@
+version: '3'
+
+networks:
+  dev:
+    driver: bridge
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    container_name: iateccalendar.webapp
+    volumes:
+      - ./IATEC.Calendar.WebApp/dist:/app/wwwroot
