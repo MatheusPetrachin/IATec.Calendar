@@ -7,7 +7,7 @@ EXPOSE 443
 
 
 COPY . .
-RUN dotnet publish ./iatec.calendar.csproj -c release -o /app
+RUN dotnet publish ./IATec.Calendar.Service/iatec.calendar.csproj -c release -o /app
 
 FROM mcr.microsoft.com/dotnet/aspnet:3.1
 WORKDIR /app
